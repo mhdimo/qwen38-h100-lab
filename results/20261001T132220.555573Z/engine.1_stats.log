@@ -1,0 +1,9 @@
+Generating SQLite file qwen38-h100-lab/results/20261001T132220.555573Z/engine.1.sqlite from qwen38-h100-lab/results/20261001T132220.555573Z/engine.1.nsys-rep
+Processing [qwen38-h100-lab/results/20261001T132220.555573Z/engine.1.sqlite] with [/opt/nvidia/nsight-systems/2025.6.3/host-linux-x64/reports/cuda_gpu_kern_sum.py] to [qwen38-h100-lab/results/20261001T132220.555573Z/engine.1_stats_cuda_gpu_kern_sum.csv]... PROCESSED
+
+Processing [qwen38-h100-lab/results/20261001T132220.555573Z/engine.1.sqlite] with [/opt/nvidia/nsight-systems/2025.6.3/host-linux-x64/reports/cuda_api_sum.py] to [qwen38-h100-lab/results/20261001T132220.555573Z/engine.1_stats_cuda_api_sum.csv]... PROCESSED
+
+Processing [qwen38-h100-lab/results/20261001T132220.555573Z/engine.1.sqlite] with [/opt/nvidia/nsight-systems/2025.6.3/host-linux-x64/reports/nvtx_sum.py] to [qwen38-h100-lab/results/20261001T132220.555573Z/engine.1_stats_nvtx_sum.csv]... PROCESSED
+
+Processing [qwen38-h100-lab/results/20261001T132220.555573Z/engine.1.sqlite] with [/opt/nvidia/nsight-systems/2025.6.3/host-linux-x64/reports/cuda_gpu_trace.py] to [qwen38-h100-lab/results/20261001T132220.555573Z/engine.1_stats_cuda_gpu_trace.csv]... PROCESSED
+

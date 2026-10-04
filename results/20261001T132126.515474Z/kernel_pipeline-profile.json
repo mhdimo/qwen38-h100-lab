@@ -1,0 +1,47 @@
+{
+  "status": "complete",
+  "profiled": true,
+  "gpu_before": "name, uuid, driver_version, memory.total [MiB], memory.used [MiB], utilization.gpu [%], power.draw [W], power.limit [W], clocks.current.sm [MHz], clocks.current.memory [MHz], temperature.gpu\nNVIDIA H100 80GB HBM3, GPU-redacted, 610.57.04, 81559 MiB, 0 MiB, 0 %, 72.04 W, 700.00 W, 345 MHz, 2619 MHz, 35",
+  "commands": [
+    {
+      "name": "systems",
+      "command": [
+        "nsys",
+        "profile",
+        "--trace=cuda,nvtx,osrt",
+        "--sample=none",
+        "--cpuctxsw=none",
+        "--capture-range=cudaProfilerApi",
+        "--capture-range-end=repeat",
+        "--cuda-graph-trace=node",
+        "--output=qwen38-h100-lab/results/20261001T132126.515474Z/systems",
+        "<python-env>/bin/python",
+        "-m",
+        "pipeline_pass.profile_target",
+        "--kind",
+        "systems",
+        "--output",
+        "qwen38-h100-lab/results/20261001T132126.515474Z/systems_target.json"
+      ],
+      "status": "complete",
+      "exit_code": 0
+    },
+    {
+      "name": "systems.1_stats",
+      "command": [
+        "nsys",
+        "stats",
+        "--report",
+        "cuda_gpu_kern_sum,cuda_api_sum,nvtx_sum,cuda_gpu_trace",
+        "--format",
+        "csv",
+        "--output",
+        "qwen38-h100-lab/results/20261001T132126.515474Z/systems.1_stats",
+        "qwen38-h100-lab/results/20261001T132126.515474Z/systems.1.nsys-rep"
+      ],
+      "status": "complete",
+      "exit_code": 0
+    }
+  ],
+  "gpu_after": "name, uuid, driver_version, memory.total [MiB], memory.used [MiB], utilization.gpu [%], power.draw [W], power.limit [W], clocks.current.sm [MHz], clocks.current.memory [MHz], temperature.gpu\nNVIDIA H100 80GB HBM3, GPU-redacted, 610.57.04, 81559 MiB, 0 MiB, 0 %, 71.86 W, 700.00 W, 345 MHz, 2619 MHz, 35"
+}

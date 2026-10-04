@@ -1,0 +1,15 @@
+[
+  {
+    "config": "kernel_pipeline-sanitize",
+    "exit_code": 0,
+    "command": [
+      "<python-env>/bin/python",
+      "-m",
+      "pipeline_pass.diagnostics",
+      "--action",
+      "sanitize",
+      "--output",
+      "qwen38-h100-lab/results/20261001T131942.649030Z/kernel_pipeline-sanitize.json"
+    ]
+  }
+]

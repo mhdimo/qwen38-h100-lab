@@ -1,0 +1,27 @@
+{
+  "name": "batch128_t16384",
+  "description": "128 sequence capacity, 32 GiB cache, capture sizes through128.",
+  "engine": {
+    "max_num_seqs": 128,
+    "max_num_batched_tokens": 16384,
+    "kv_cache_memory_bytes": 34359738368,
+    "compilation_config": {
+      "cudagraph_mode": "FULL_AND_PIECEWISE",
+      "cudagraph_capture_sizes": [
+        1,
+        2,
+        4,
+        8,
+        16,
+        24,
+        32,
+        48,
+        64,
+        96,
+        128
+      ],
+      "max_cudagraph_capture_size": 128,
+      "cudagraph_mm_encoder": false
+    }
+  }
+}

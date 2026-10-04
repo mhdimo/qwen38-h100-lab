@@ -1,0 +1,27 @@
+{
+  "name": "batch64_t16384_gdn",
+  "description": "GDN decode-only CUDA ablation; same tuned engine settings.",
+  "engine": {
+    "max_num_seqs": 64,
+    "max_num_batched_tokens": 16384,
+    "kv_cache_memory_bytes": 17179869184,
+    "compilation_config": {
+      "cudagraph_mode": "FULL_AND_PIECEWISE",
+      "cudagraph_capture_sizes": [
+        1,
+        2,
+        4,
+        8,
+        16,
+        24,
+        32,
+        48,
+        64
+      ],
+      "max_cudagraph_capture_size": 64,
+      "cudagraph_mm_encoder": false,
+      "cache_dir": "gdn_pass/build/gdn_compile"
+    },
+    "worker_cls": "gdn_pass.worker.GDNWorker"
+  }
+}

@@ -1,0 +1,6 @@
+[
+  {"name":"decode_c1","input_tokens":128,"output_tokens":128,"concurrency":1,"requests":8},
+  {"name":"prefill_c32","input_tokens":4096,"output_tokens":1,"concurrency":32,"requests":64},
+  {"name":"decode_c32","input_tokens":128,"output_tokens":128,"concurrency":32,"requests":64},
+  {"name":"mixed_c32","input_tokens":1024,"output_tokens":128,"concurrency":32,"requests":64}
+]

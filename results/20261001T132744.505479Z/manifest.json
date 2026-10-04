@@ -1,0 +1,15 @@
+[
+  {
+    "config": "kernel_pipeline-bench",
+    "exit_code": 0,
+    "command": [
+      "<python-env>/bin/python",
+      "-m",
+      "pipeline_pass.experiment",
+      "--action",
+      "bench",
+      "--output",
+      "qwen38-h100-lab/results/20261001T132744.505479Z/kernel_pipeline-bench.json"
+    ]
+  }
+]

@@ -1,0 +1,14 @@
+[1/2] /usr/local/cuda/bin/nvcc -MD -MF silu_mul_fp8.cuda.o.d -DTORCH_EXTENSION_NAME=qwen_lab_silu_fp8 -DTORCH_API_INCLUDE_EXTENSION_H -isystem <python-env>/lib/python3.14/site-packages/torch/include -isystem <python-env>/lib/python3.14/site-packages/torch/include/torch/csrc/api/include -isystem /usr/local/cuda/include -isystem <python-env>/include/python3.14 -D__CUDA_NO_HALF_OPERATORS__ -D__CUDA_NO_HALF_CONVERSIONS__ -D__CUDA_NO_BFLOAT16_CONVERSIONS__ -D__CUDA_NO_HALF2_OPERATORS__ --expt-relaxed-constexpr -gencode=arch=compute_90,code=sm_90 --compiler-options '-fPIC' -O3 -lineinfo -Xptxas=-v -std=c++17 -c qwen38-h100-lab/custom_kernels/silu_mul_fp8.cu -o silu_mul_fp8.cuda.o 
+ptxas info    : 46 bytes gmem
+ptxas info    : Compiling entry function '_ZN56_GLOBAL__N__c95c4f05_15_silu_mul_fp8_cu_2f276439_177578124silu_mul_fp8_warp_kernelEPK13__nv_bfloat16PhPfPKfxxxx' for 'sm_90'
+ptxas info    : Function properties for _ZN56_GLOBAL__N__c95c4f05_15_silu_mul_fp8_cu_2f276439_177578124silu_mul_fp8_warp_kernelEPK13__nv_bfloat16PhPfPKfxxxx
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 29 registers, used 0 barriers
+ptxas info    : Compile time = 25.941 ms
+ptxas info    : Compiling entry function '_ZN3cub16_V_300200_SM_9006detail11EmptyKernelIvEEvv' for 'sm_90'
+ptxas info    : Function properties for _ZN3cub16_V_300200_SM_9006detail11EmptyKernelIvEEvv
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 4 registers, used 0 barriers
+ptxas info    : Compile time = 0.591 ms
+[2/2] c++ silu_mul_fp8.cuda.o -shared -L<python-env>/lib/python3.14/site-packages/torch/lib -lc10 -lc10_cuda -ltorch_cpu -ltorch_cuda -ltorch -ltorch_python -L/usr/local/cuda/lib64 -lcudart -o qwen_lab_silu_fp8.so
+QWEN_LAB: enabled custom CUDA SiLU/FP8 kernel for 128-element groups

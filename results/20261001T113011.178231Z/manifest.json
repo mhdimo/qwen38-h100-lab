@@ -1,0 +1,18 @@
+[
+  {
+    "config": "baseline",
+    "exit_code": 0,
+    "command": [
+      "<python-env>/bin/python",
+      "qwen38-h100-lab/benchmark.py",
+      "--config",
+      "qwen38-h100-lab/configs/baseline.json",
+      "--workloads",
+      "qwen38-h100-lab/workloads.json",
+      "--output",
+      "qwen38-h100-lab/results/20261001T113011.178231Z/baseline.json",
+      "--repetitions",
+      "2"
+    ]
+  }
+]

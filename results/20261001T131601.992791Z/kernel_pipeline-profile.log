@@ -1,0 +1,15 @@
+{"name": "compute", "command": ["sudo", "-n", "env", "PATH=<python-env>/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin", "VLLM_CACHE_ROOT=qwen38-h100-lab/gdn_pass/build/vllm", "TRITON_CACHE_DIR=qwen38-h100-lab/gdn_pass/build/triton", "TORCHINDUCTOR_CACHE_DIR=qwen38-h100-lab/gdn_pass/build/inductor", "CUDA_CACHE_PATH=qwen38-h100-lab/gdn_pass/build/driver", "TMPDIR=qwen38-h100-lab/gdn_pass/build/tmp", "/opt/nvidia/nsight-compute/2026.1.1/ncu", "--config-file", "off", "--section-folder", "/opt/nvidia/nsight-compute/2026.1.1/sections", "--profile-from-start", "off", "--target-processes", "all", "--nvtx", "--section", "SpeedOfLight", "--section", "MemoryWorkloadAnalysis", "--section", "Occupancy", "--section", "LaunchStats", "--section", "WarpStateStats", "--section", "SourceCounters", "--export", "qwen38-h100-lab/results/20261001T131601.992791Z/compute", "runuser", "-u", "ubuntu", "--", "env", "PATH=<python-env>/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin", "VLLM_CACHE_ROOT=qwen38-h100-lab/gdn_pass/build/vllm", "TRITON_CACHE_DIR=qwen38-h100-lab/gdn_pass/build/triton", "TORCHINDUCTOR_CACHE_DIR=qwen38-h100-lab/gdn_pass/build/inductor", "CUDA_CACHE_PATH=qwen38-h100-lab/gdn_pass/build/driver", "TMPDIR=qwen38-h100-lab/gdn_pass/build/tmp", "<python-env>/bin/python", "-m", "pipeline_pass.profile_target", "--kind", "compute", "--output", "qwen38-h100-lab/results/20261001T131601.992791Z/compute_target.json"], "exit_code": 0}
+{"name": "report_owner", "command": ["sudo", "-n", "chown", "1000:1000", "qwen38-h100-lab/results/20261001T131601.992791Z/compute.ncu-rep"], "exit_code": 1}
+Traceback (most recent call last):
+  File "<frozen runpy>", line 203, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "qwen38-h100-lab/pipeline_pass/diagnostics.py", line 72, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "qwen38-h100-lab/pipeline_pass/diagnostics.py", line 49, in main
+    run('report_owner',['sudo','-n','chown',f'{os.getuid()}:{os.getgid()}',str(report)])
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "qwen38-h100-lab/pipeline_pass/diagnostics.py", line 25, in run
+    if required and proc.returncode:raise RuntimeError(f'{name} failed: {proc.returncode}')
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: report_owner failed: 1

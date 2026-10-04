@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 203, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "qwen38-h100-lab/pipeline_pass/experiment.py", line 86, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "qwen38-h100-lab/pipeline_pass/experiment.py", line 75, in main
+    if not (HERE/'gdn_pipeline.cu').is_file():raise AssertionError('Persistent/async CUDA kernel not implemented')
+                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Persistent/async CUDA kernel not implemented

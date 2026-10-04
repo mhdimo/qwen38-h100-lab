@@ -1,0 +1,15 @@
+[
+  {
+    "config": "kernel_gdn-bench",
+    "exit_code": 0,
+    "command": [
+      "<python-env>/bin/python",
+      "-m",
+      "gdn_pass.experiment",
+      "--action",
+      "bench",
+      "--output",
+      "qwen38-h100-lab/results/20261001T124251.173582Z/kernel_gdn-bench.json"
+    ]
+  }
+]

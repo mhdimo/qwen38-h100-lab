@@ -1,0 +1,31 @@
+==PROF== Connected to process 1782660 (<python-env>/bin/python3.14)
+ninja: no work to do.
+ninja: no work to do.
+ninja: no work to do.
+==PROF== Profiling "fused_recurrent_gated_delta_r..." - 0: 0%....50%....100% - 20 passes
+==PROF== Profiling "gdn_decode_warp_kernel" - 1: 0%....50%....100% - 20 passes
+==PROF== Profiling "gdn_pipeline_kernel" - 2: 0%....50%....100% - 20 passes
+==PROF== Profiling "gdn_pipeline_kernel" - 3: 0%....50%....100% - 20 passes
+==PROF== Profiling "gdn_pipeline_kernel" - 4: 0%....50%....100% - 20 passes
+==PROF== Profiling "gdn_pipeline_kernel" - 5: 0%....50%....100% - 20 passes
+==PROF== Profiling "gdn_pipeline_kernel" - 6: 0%....50%....100% - 20 passes
+==PROF== Profiling "fused_recurrent_gated_delta_r..." - 7: 0%....50%....100% - 20 passes
+==PROF== Profiling "gdn_decode_warp_kernel" - 8: 0%....50%....100% - 20 passes
+==PROF== Profiling "gdn_pipeline_kernel" - 9: 0%....50%....100% - 20 passes
+==PROF== Profiling "gdn_pipeline_kernel" - 10: 0%....50%....100% - 20 passes
+==PROF== Profiling "gdn_pipeline_kernel" - 11: 0%....50%....100% - 20 passes
+==PROF== Profiling "gdn_pipeline_kernel" - 12: 0%....50%....100% - 20 passes
+==PROF== Profiling "gdn_pipeline_kernel" - 13: 0%....50%....100% - 20 passes
+==PROF== Profiling "fused_recurrent_gated_delta_r..." - 14: 0%....50%....100% - 20 passes
+==PROF== Profiling "gdn_decode_warp_kernel" - 15: 0%....50%....100% - 20 passes
+==PROF== Profiling "gdn_pipeline_kernel" - 16: 0%....50%....100% - 20 passes
+==PROF== Profiling "gdn_pipeline_kernel" - 17: 0%....50%....100% - 20 passes
+==PROF== Profiling "gdn_pipeline_kernel" - 18: 0%....50%....100% - 20 passes
+==PROF== Profiling "gdn_pipeline_kernel" - 19: 0%....50%....100% - 20 passes
+==PROF== Profiling "gdn_pipeline_kernel" - 20: 0%....50%....100% - 20 passes
+==PROF== Profiling "silu_and_mul_per_block_quant_..." - 21: 0%....50%....100% - 20 passes
+==PROF== Profiling "silu_mul_fp8_warp_kernel" - 22: 0%....50%....100% - 20 passes
+==PROF== Profiling "silu_and_mul_per_block_quant_..." - 23: 0%....50%....100% - 20 passes
+==PROF== Profiling "silu_mul_fp8_warp_kernel" - 24: 0%....50%....100% - 20 passes
+==PROF== Disconnected from process 1782660
+==PROF== Report: qwen38-h100-lab/results/20261001T131906.154994Z/compute.ncu-rep

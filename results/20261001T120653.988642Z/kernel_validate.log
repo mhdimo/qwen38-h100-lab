@@ -1,0 +1,26 @@
+[1/2] /usr/local/cuda/bin/nvcc -MD -MF silu_mul_fp8.cuda.o.d -DTORCH_EXTENSION_NAME=qwen_lab_silu_fp8 -DTORCH_API_INCLUDE_EXTENSION_H -isystem <python-env>/lib/python3.14/site-packages/torch/include -isystem <python-env>/lib/python3.14/site-packages/torch/include/torch/csrc/api/include -isystem /usr/local/cuda/include -isystem <python-env>/include/python3.14 -D__CUDA_NO_HALF_OPERATORS__ -D__CUDA_NO_HALF_CONVERSIONS__ -D__CUDA_NO_BFLOAT16_CONVERSIONS__ -D__CUDA_NO_HALF2_OPERATORS__ --expt-relaxed-constexpr -gencode=arch=compute_90,code=sm_90 --compiler-options '-fPIC' -O3 --use_fast_math -lineinfo -Xptxas=-v -std=c++17 -c qwen38-h100-lab/custom_kernels/silu_mul_fp8.cu -o silu_mul_fp8.cuda.o 
+ptxas info    : 46 bytes gmem
+ptxas info    : Compiling entry function '_ZN56_GLOBAL__N__c95c4f05_15_silu_mul_fp8_cu_9c802fde_177546124silu_mul_fp8_warp_kernelEPK13__nv_bfloat16PhPfPKfxxxx' for 'sm_90'
+ptxas info    : Function properties for _ZN56_GLOBAL__N__c95c4f05_15_silu_mul_fp8_cu_9c802fde_177546124silu_mul_fp8_warp_kernelEPK13__nv_bfloat16PhPfPKfxxxx
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 27 registers, used 0 barriers
+ptxas info    : Compile time = 13.539 ms
+ptxas info    : Compiling entry function '_ZN3cub16_V_300200_SM_9006detail11EmptyKernelIvEEvv' for 'sm_90'
+ptxas info    : Function properties for _ZN3cub16_V_300200_SM_9006detail11EmptyKernelIvEEvv
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 4 registers, used 0 barriers
+ptxas info    : Compile time = 0.781 ms
+[2/2] c++ silu_mul_fp8.cuda.o -shared -L<python-env>/lib/python3.14/site-packages/torch/lib -lc10 -lc10_cuda -ltorch_cpu -ltorch_cuda -ltorch -ltorch_python -L/usr/local/cuda/lib64 -lcudart -o qwen_lab_silu_fp8.so
+Traceback (most recent call last):
+  File "<frozen runpy>", line 203, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "qwen38-h100-lab/custom_kernels/experiment.py", line 150, in <module>
+    if __name__=='__main__': main()
+                             ~~~~^^
+  File "qwen38-h100-lab/custom_kernels/experiment.py", line 140, in main
+    result['results']=validate(torch,custom,baseline) if args.action=='validate' else bench(torch,custom,baseline)
+                      ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "qwen38-h100-lab/custom_kernels/experiment.py", line 51, in validate
+    assert torch.equal(y.view(torch.uint8), y0.view(torch.uint8)), \
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: FP8 bytes differ: seed=0 M=7 N=17408 random ub=0.001

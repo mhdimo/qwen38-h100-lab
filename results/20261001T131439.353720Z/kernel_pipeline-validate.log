@@ -1,0 +1,104 @@
+[1/2] /usr/local/cuda/bin/nvcc -MD -MF gdn_pipeline.cuda.o.d -DTORCH_EXTENSION_NAME=qwen_gdn_pipeline -DTORCH_API_INCLUDE_EXTENSION_H -isystem <python-env>/lib/python3.14/site-packages/torch/include -isystem <python-env>/lib/python3.14/site-packages/torch/include/torch/csrc/api/include -isystem /usr/local/cuda/include -isystem <python-env>/include/python3.14 -D__CUDA_NO_HALF_OPERATORS__ -D__CUDA_NO_HALF_CONVERSIONS__ -D__CUDA_NO_BFLOAT16_CONVERSIONS__ -D__CUDA_NO_HALF2_OPERATORS__ --expt-relaxed-constexpr -gencode=arch=compute_90,code=sm_90 --compiler-options '-fPIC' -O3 -lineinfo -Xptxas=-v -std=c++17 -c qwen38-h100-lab/pipeline_pass/gdn_pipeline.cu -o gdn_pipeline.cuda.o 
+ptxas info    : 46 bytes gmem
+ptxas info    : Compiling entry function '_ZN56_GLOBAL__N__96c3e88c_15_gdn_pipeline_cu_7e7f91b3_178219919gdn_pipeline_kernelIi13__nv_bfloat16Lb0ELb0EEEvPKS1_S3_S3_PKfPKT0_PfPS1_PKT_llllllfii' for 'sm_90'
+ptxas info    : Function properties for _ZN56_GLOBAL__N__96c3e88c_15_gdn_pipeline_cu_7e7f91b3_178219919gdn_pipeline_kernelIi13__nv_bfloat16Lb0ELb0EEEvPKS1_S3_S3_PKfPKT0_PfPS1_PKT_llllllfii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 44 registers, used 0 barriers
+ptxas info    : Compile time = 31.961 ms
+ptxas info    : Compiling entry function '_ZN56_GLOBAL__N__96c3e88c_15_gdn_pipeline_cu_7e7f91b3_178219919gdn_pipeline_kernelIi13__nv_bfloat16Lb0ELb1EEEvPKS1_S3_S3_PKfPKT0_PfPS1_PKT_llllllfii' for 'sm_90'
+ptxas info    : Function properties for _ZN56_GLOBAL__N__96c3e88c_15_gdn_pipeline_cu_7e7f91b3_178219919gdn_pipeline_kernelIi13__nv_bfloat16Lb0ELb1EEEvPKS1_S3_S3_PKfPKT0_PfPS1_PKT_llllllfii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 40 registers, used 0 barriers
+ptxas info    : Compile time = 31.312 ms
+ptxas info    : Compiling entry function '_ZN56_GLOBAL__N__96c3e88c_15_gdn_pipeline_cu_7e7f91b3_178219919gdn_pipeline_kernelIi13__nv_bfloat16Lb1ELb0EEEvPKS1_S3_S3_PKfPKT0_PfPS1_PKT_llllllfii' for 'sm_90'
+ptxas info    : Function properties for _ZN56_GLOBAL__N__96c3e88c_15_gdn_pipeline_cu_7e7f91b3_178219919gdn_pipeline_kernelIi13__nv_bfloat16Lb1ELb0EEEvPKS1_S3_S3_PKfPKT0_PfPS1_PKT_llllllfii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 43 registers, used 0 barriers
+ptxas info    : Compile time = 36.650 ms
+ptxas info    : Compiling entry function '_ZN56_GLOBAL__N__96c3e88c_15_gdn_pipeline_cu_7e7f91b3_178219919gdn_pipeline_kernelIi13__nv_bfloat16Lb1ELb1EEEvPKS1_S3_S3_PKfPKT0_PfPS1_PKT_llllllfii' for 'sm_90'
+ptxas info    : Function properties for _ZN56_GLOBAL__N__96c3e88c_15_gdn_pipeline_cu_7e7f91b3_178219919gdn_pipeline_kernelIi13__nv_bfloat16Lb1ELb1EEEvPKS1_S3_S3_PKfPKT0_PfPS1_PKT_llllllfii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 40 registers, used 0 barriers
+ptxas info    : Compile time = 37.944 ms
+ptxas info    : Compiling entry function '_ZN56_GLOBAL__N__96c3e88c_15_gdn_pipeline_cu_7e7f91b3_178219919gdn_pipeline_kernelIifLb0ELb0EEEvPK13__nv_bfloat16S3_S3_PKfPKT0_PfPS1_PKT_llllllfii' for 'sm_90'
+ptxas info    : Function properties for _ZN56_GLOBAL__N__96c3e88c_15_gdn_pipeline_cu_7e7f91b3_178219919gdn_pipeline_kernelIifLb0ELb0EEEvPK13__nv_bfloat16S3_S3_PKfPKT0_PfPS1_PKT_llllllfii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 44 registers, used 0 barriers
+ptxas info    : Compile time = 30.260 ms
+ptxas info    : Compiling entry function '_ZN56_GLOBAL__N__96c3e88c_15_gdn_pipeline_cu_7e7f91b3_178219919gdn_pipeline_kernelIifLb0ELb1EEEvPK13__nv_bfloat16S3_S3_PKfPKT0_PfPS1_PKT_llllllfii' for 'sm_90'
+ptxas info    : Function properties for _ZN56_GLOBAL__N__96c3e88c_15_gdn_pipeline_cu_7e7f91b3_178219919gdn_pipeline_kernelIifLb0ELb1EEEvPK13__nv_bfloat16S3_S3_PKfPKT0_PfPS1_PKT_llllllfii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 40 registers, used 0 barriers
+ptxas info    : Compile time = 31.640 ms
+ptxas info    : Compiling entry function '_ZN56_GLOBAL__N__96c3e88c_15_gdn_pipeline_cu_7e7f91b3_178219919gdn_pipeline_kernelIifLb1ELb0EEEvPK13__nv_bfloat16S3_S3_PKfPKT0_PfPS1_PKT_llllllfii' for 'sm_90'
+ptxas info    : Function properties for _ZN56_GLOBAL__N__96c3e88c_15_gdn_pipeline_cu_7e7f91b3_178219919gdn_pipeline_kernelIifLb1ELb0EEEvPK13__nv_bfloat16S3_S3_PKfPKT0_PfPS1_PKT_llllllfii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 43 registers, used 0 barriers
+ptxas info    : Compile time = 36.309 ms
+ptxas info    : Compiling entry function '_ZN56_GLOBAL__N__96c3e88c_15_gdn_pipeline_cu_7e7f91b3_178219919gdn_pipeline_kernelIifLb1ELb1EEEvPK13__nv_bfloat16S3_S3_PKfPKT0_PfPS1_PKT_llllllfii' for 'sm_90'
+ptxas info    : Function properties for _ZN56_GLOBAL__N__96c3e88c_15_gdn_pipeline_cu_7e7f91b3_178219919gdn_pipeline_kernelIifLb1ELb1EEEvPK13__nv_bfloat16S3_S3_PKfPKT0_PfPS1_PKT_llllllfii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 40 registers, used 0 barriers
+ptxas info    : Compile time = 37.863 ms
+ptxas info    : Compiling entry function '_ZN56_GLOBAL__N__96c3e88c_15_gdn_pipeline_cu_7e7f91b3_178219919gdn_pipeline_kernelIl13__nv_bfloat16Lb0ELb0EEEvPKS1_S3_S3_PKfPKT0_PfPS1_PKT_llllllfii' for 'sm_90'
+ptxas info    : Function properties for _ZN56_GLOBAL__N__96c3e88c_15_gdn_pipeline_cu_7e7f91b3_178219919gdn_pipeline_kernelIl13__nv_bfloat16Lb0ELb0EEEvPKS1_S3_S3_PKfPKT0_PfPS1_PKT_llllllfii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 44 registers, used 0 barriers
+ptxas info    : Compile time = 29.059 ms
+ptxas info    : Compiling entry function '_ZN56_GLOBAL__N__96c3e88c_15_gdn_pipeline_cu_7e7f91b3_178219919gdn_pipeline_kernelIl13__nv_bfloat16Lb0ELb1EEEvPKS1_S3_S3_PKfPKT0_PfPS1_PKT_llllllfii' for 'sm_90'
+ptxas info    : Function properties for _ZN56_GLOBAL__N__96c3e88c_15_gdn_pipeline_cu_7e7f91b3_178219919gdn_pipeline_kernelIl13__nv_bfloat16Lb0ELb1EEEvPKS1_S3_S3_PKfPKT0_PfPS1_PKT_llllllfii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 40 registers, used 0 barriers
+ptxas info    : Compile time = 31.221 ms
+ptxas info    : Compiling entry function '_ZN56_GLOBAL__N__96c3e88c_15_gdn_pipeline_cu_7e7f91b3_178219919gdn_pipeline_kernelIl13__nv_bfloat16Lb1ELb0EEEvPKS1_S3_S3_PKfPKT0_PfPS1_PKT_llllllfii' for 'sm_90'
+ptxas info    : Function properties for _ZN56_GLOBAL__N__96c3e88c_15_gdn_pipeline_cu_7e7f91b3_178219919gdn_pipeline_kernelIl13__nv_bfloat16Lb1ELb0EEEvPKS1_S3_S3_PKfPKT0_PfPS1_PKT_llllllfii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 43 registers, used 0 barriers
+ptxas info    : Compile time = 35.009 ms
+ptxas info    : Compiling entry function '_ZN56_GLOBAL__N__96c3e88c_15_gdn_pipeline_cu_7e7f91b3_178219919gdn_pipeline_kernelIl13__nv_bfloat16Lb1ELb1EEEvPKS1_S3_S3_PKfPKT0_PfPS1_PKT_llllllfii' for 'sm_90'
+ptxas info    : Function properties for _ZN56_GLOBAL__N__96c3e88c_15_gdn_pipeline_cu_7e7f91b3_178219919gdn_pipeline_kernelIl13__nv_bfloat16Lb1ELb1EEEvPKS1_S3_S3_PKfPKT0_PfPS1_PKT_llllllfii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 40 registers, used 0 barriers
+ptxas info    : Compile time = 36.762 ms
+ptxas info    : Compiling entry function '_ZN56_GLOBAL__N__96c3e88c_15_gdn_pipeline_cu_7e7f91b3_178219919gdn_pipeline_kernelIlfLb0ELb0EEEvPK13__nv_bfloat16S3_S3_PKfPKT0_PfPS1_PKT_llllllfii' for 'sm_90'
+ptxas info    : Function properties for _ZN56_GLOBAL__N__96c3e88c_15_gdn_pipeline_cu_7e7f91b3_178219919gdn_pipeline_kernelIlfLb0ELb0EEEvPK13__nv_bfloat16S3_S3_PKfPKT0_PfPS1_PKT_llllllfii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 44 registers, used 0 barriers
+ptxas info    : Compile time = 28.923 ms
+ptxas info    : Compiling entry function '_ZN56_GLOBAL__N__96c3e88c_15_gdn_pipeline_cu_7e7f91b3_178219919gdn_pipeline_kernelIlfLb0ELb1EEEvPK13__nv_bfloat16S3_S3_PKfPKT0_PfPS1_PKT_llllllfii' for 'sm_90'
+ptxas info    : Function properties for _ZN56_GLOBAL__N__96c3e88c_15_gdn_pipeline_cu_7e7f91b3_178219919gdn_pipeline_kernelIlfLb0ELb1EEEvPK13__nv_bfloat16S3_S3_PKfPKT0_PfPS1_PKT_llllllfii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 40 registers, used 0 barriers
+ptxas info    : Compile time = 30.445 ms
+ptxas info    : Compiling entry function '_ZN56_GLOBAL__N__96c3e88c_15_gdn_pipeline_cu_7e7f91b3_178219919gdn_pipeline_kernelIlfLb1ELb0EEEvPK13__nv_bfloat16S3_S3_PKfPKT0_PfPS1_PKT_llllllfii' for 'sm_90'
+ptxas info    : Function properties for _ZN56_GLOBAL__N__96c3e88c_15_gdn_pipeline_cu_7e7f91b3_178219919gdn_pipeline_kernelIlfLb1ELb0EEEvPK13__nv_bfloat16S3_S3_PKfPKT0_PfPS1_PKT_llllllfii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 43 registers, used 0 barriers
+ptxas info    : Compile time = 34.763 ms
+ptxas info    : Compiling entry function '_ZN56_GLOBAL__N__96c3e88c_15_gdn_pipeline_cu_7e7f91b3_178219919gdn_pipeline_kernelIlfLb1ELb1EEEvPK13__nv_bfloat16S3_S3_PKfPKT0_PfPS1_PKT_llllllfii' for 'sm_90'
+ptxas info    : Function properties for _ZN56_GLOBAL__N__96c3e88c_15_gdn_pipeline_cu_7e7f91b3_178219919gdn_pipeline_kernelIlfLb1ELb1EEEvPK13__nv_bfloat16S3_S3_PKfPKT0_PfPS1_PKT_llllllfii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 40 registers, used 0 barriers
+ptxas info    : Compile time = 36.585 ms
+ptxas info    : Compiling entry function '_ZN3cub16_V_300200_SM_9006detail11EmptyKernelIvEEvv' for 'sm_90'
+ptxas info    : Function properties for _ZN3cub16_V_300200_SM_9006detail11EmptyKernelIvEEvv
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 4 registers, used 0 barriers
+ptxas info    : Compile time = 0.546 ms
+[2/2] c++ gdn_pipeline.cuda.o -shared -L<python-env>/lib/python3.14/site-packages/torch/lib -lc10 -lc10_cuda -ltorch_cpu -ltorch_cuda -ltorch -ltorch_python -L/usr/local/cuda/lib64 -lcudart -o qwen_gdn_pipeline.so
+{"variant": "direct_t1_c0", "passed": true}
+{"variant": "direct_t1_c4", "passed": true}
+{"variant": "direct_t2_c0", "passed": true}
+{"variant": "direct_t2_c4", "passed": true}
+{"variant": "direct_t4_c0", "passed": true}
+{"variant": "direct_t4_c4", "passed": true}
+{"variant": "direct_t8_c0", "passed": true}
+{"variant": "direct_t8_c4", "passed": true}
+{"variant": "async_t1_c0", "passed": true}
+{"variant": "async_t1_c4", "passed": true}
+{"variant": "async_t2_c0", "passed": true}
+{"variant": "async_t2_c4", "passed": true}
+{"variant": "async_t4_c0", "passed": true}
+{"variant": "async_t4_c4", "passed": true}
+{"variant": "async_t8_c0", "passed": true}
+{"variant": "async_t8_c4", "passed": true}

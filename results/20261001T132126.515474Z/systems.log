@@ -1,0 +1,10 @@
+ninja: no work to do.
+ninja: no work to do.
+ninja: no work to do.
+Capture range started in the application.
+Capture range ended in the application.
+Generating 'qwen38-h100-lab/gdn_pass/build/tmp/nsys-report-93c3.qdstrm'
+[1/1] [0%                          ] systems.1.nsys-repProcessing events...
+[1/1] [0%                          ] systems.1.nsys-rep[1/1] [12%                         ] systems.1.nsys-rep[1/1] [====25%                     ] systems.1.nsys-rep[1/1] [==============62%           ] systems.1.nsys-rep[1/1] [========================100%] systems.1.nsys-rep[1/1] [========================100%] systems.1.nsys-rep
+Generated:
+	qwen38-h100-lab/results/20261001T132126.515474Z/systems.1.nsys-rep

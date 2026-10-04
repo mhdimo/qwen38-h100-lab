@@ -1,0 +1,128 @@
+[1/2] /usr/local/cuda/bin/nvcc -MD -MF gdn_decode.cuda.o.d -DTORCH_EXTENSION_NAME=qwen_gdn_decode -DTORCH_API_INCLUDE_EXTENSION_H -isystem <python-env>/lib/python3.14/site-packages/torch/include -isystem <python-env>/lib/python3.14/site-packages/torch/include/torch/csrc/api/include -isystem /usr/local/cuda/include -isystem <python-env>/include/python3.14 -D__CUDA_NO_HALF_OPERATORS__ -D__CUDA_NO_HALF_CONVERSIONS__ -D__CUDA_NO_BFLOAT16_CONVERSIONS__ -D__CUDA_NO_HALF2_OPERATORS__ --expt-relaxed-constexpr -gencode=arch=compute_90,code=sm_90 --compiler-options '-fPIC' -O3 -lineinfo -Xptxas=-v -std=c++17 -c qwen38-h100-lab/gdn_pass/gdn_decode.cu -o gdn_decode.cuda.o 
+ptxas info    : 46 bytes gmem
+ptxas info    : Compiling entry function '_ZN54_GLOBAL__N__9d958594_13_gdn_decode_cu_8075afd6_177842122gdn_decode_warp_kernelIi13__nv_bfloat16Lb0ELi16EEEvPKS1_S3_S3_PKfPKT0_PfPS1_PKT_llllllf' for 'sm_90'
+ptxas info    : Function properties for _ZN54_GLOBAL__N__9d958594_13_gdn_decode_cu_8075afd6_177842122gdn_decode_warp_kernelIi13__nv_bfloat16Lb0ELi16EEEvPKS1_S3_S3_PKfPKT0_PfPS1_PKT_llllllf
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 104 registers, used 0 barriers
+ptxas info    : Compile time = 47.570 ms
+ptxas info    : Compiling entry function '_ZN54_GLOBAL__N__9d958594_13_gdn_decode_cu_8075afd6_177842122gdn_decode_warp_kernelIi13__nv_bfloat16Lb0ELi8EEEvPKS1_S3_S3_PKfPKT0_PfPS1_PKT_llllllf' for 'sm_90'
+ptxas info    : Function properties for _ZN54_GLOBAL__N__9d958594_13_gdn_decode_cu_8075afd6_177842122gdn_decode_warp_kernelIi13__nv_bfloat16Lb0ELi8EEEvPKS1_S3_S3_PKfPKT0_PfPS1_PKT_llllllf
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 62 registers, used 0 barriers
+ptxas info    : Compile time = 26.564 ms
+ptxas info    : Compiling entry function '_ZN54_GLOBAL__N__9d958594_13_gdn_decode_cu_8075afd6_177842122gdn_decode_warp_kernelIi13__nv_bfloat16Lb0ELi4EEEvPKS1_S3_S3_PKfPKT0_PfPS1_PKT_llllllf' for 'sm_90'
+ptxas info    : Function properties for _ZN54_GLOBAL__N__9d958594_13_gdn_decode_cu_8075afd6_177842122gdn_decode_warp_kernelIi13__nv_bfloat16Lb0ELi4EEEvPKS1_S3_S3_PKfPKT0_PfPS1_PKT_llllllf
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 40 registers, used 0 barriers
+ptxas info    : Compile time = 19.349 ms
+ptxas info    : Compiling entry function '_ZN54_GLOBAL__N__9d958594_13_gdn_decode_cu_8075afd6_177842122gdn_decode_warp_kernelIi13__nv_bfloat16Lb1ELi16EEEvPKS1_S3_S3_PKfPKT0_PfPS1_PKT_llllllf' for 'sm_90'
+ptxas info    : Function properties for _ZN54_GLOBAL__N__9d958594_13_gdn_decode_cu_8075afd6_177842122gdn_decode_warp_kernelIi13__nv_bfloat16Lb1ELi16EEEvPKS1_S3_S3_PKfPKT0_PfPS1_PKT_llllllf
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 104 registers, used 0 barriers
+ptxas info    : Compile time = 49.594 ms
+ptxas info    : Compiling entry function '_ZN54_GLOBAL__N__9d958594_13_gdn_decode_cu_8075afd6_177842122gdn_decode_warp_kernelIi13__nv_bfloat16Lb1ELi8EEEvPKS1_S3_S3_PKfPKT0_PfPS1_PKT_llllllf' for 'sm_90'
+ptxas info    : Function properties for _ZN54_GLOBAL__N__9d958594_13_gdn_decode_cu_8075afd6_177842122gdn_decode_warp_kernelIi13__nv_bfloat16Lb1ELi8EEEvPKS1_S3_S3_PKfPKT0_PfPS1_PKT_llllllf
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 62 registers, used 0 barriers
+ptxas info    : Compile time = 31.180 ms
+ptxas info    : Compiling entry function '_ZN54_GLOBAL__N__9d958594_13_gdn_decode_cu_8075afd6_177842122gdn_decode_warp_kernelIi13__nv_bfloat16Lb1ELi4EEEvPKS1_S3_S3_PKfPKT0_PfPS1_PKT_llllllf' for 'sm_90'
+ptxas info    : Function properties for _ZN54_GLOBAL__N__9d958594_13_gdn_decode_cu_8075afd6_177842122gdn_decode_warp_kernelIi13__nv_bfloat16Lb1ELi4EEEvPKS1_S3_S3_PKfPKT0_PfPS1_PKT_llllllf
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 40 registers, used 0 barriers
+ptxas info    : Compile time = 24.204 ms
+ptxas info    : Compiling entry function '_ZN54_GLOBAL__N__9d958594_13_gdn_decode_cu_8075afd6_177842122gdn_decode_warp_kernelIifLb0ELi16EEEvPK13__nv_bfloat16S3_S3_PKfPKT0_PfPS1_PKT_llllllf' for 'sm_90'
+ptxas info    : Function properties for _ZN54_GLOBAL__N__9d958594_13_gdn_decode_cu_8075afd6_177842122gdn_decode_warp_kernelIifLb0ELi16EEEvPK13__nv_bfloat16S3_S3_PKfPKT0_PfPS1_PKT_llllllf
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 104 registers, used 0 barriers
+ptxas info    : Compile time = 46.424 ms
+ptxas info    : Compiling entry function '_ZN54_GLOBAL__N__9d958594_13_gdn_decode_cu_8075afd6_177842122gdn_decode_warp_kernelIifLb0ELi8EEEvPK13__nv_bfloat16S3_S3_PKfPKT0_PfPS1_PKT_llllllf' for 'sm_90'
+ptxas info    : Function properties for _ZN54_GLOBAL__N__9d958594_13_gdn_decode_cu_8075afd6_177842122gdn_decode_warp_kernelIifLb0ELi8EEEvPK13__nv_bfloat16S3_S3_PKfPKT0_PfPS1_PKT_llllllf
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 62 registers, used 0 barriers
+ptxas info    : Compile time = 26.577 ms
+ptxas info    : Compiling entry function '_ZN54_GLOBAL__N__9d958594_13_gdn_decode_cu_8075afd6_177842122gdn_decode_warp_kernelIifLb0ELi4EEEvPK13__nv_bfloat16S3_S3_PKfPKT0_PfPS1_PKT_llllllf' for 'sm_90'
+ptxas info    : Function properties for _ZN54_GLOBAL__N__9d958594_13_gdn_decode_cu_8075afd6_177842122gdn_decode_warp_kernelIifLb0ELi4EEEvPK13__nv_bfloat16S3_S3_PKfPKT0_PfPS1_PKT_llllllf
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 40 registers, used 0 barriers
+ptxas info    : Compile time = 18.460 ms
+ptxas info    : Compiling entry function '_ZN54_GLOBAL__N__9d958594_13_gdn_decode_cu_8075afd6_177842122gdn_decode_warp_kernelIifLb1ELi16EEEvPK13__nv_bfloat16S3_S3_PKfPKT0_PfPS1_PKT_llllllf' for 'sm_90'
+ptxas info    : Function properties for _ZN54_GLOBAL__N__9d958594_13_gdn_decode_cu_8075afd6_177842122gdn_decode_warp_kernelIifLb1ELi16EEEvPK13__nv_bfloat16S3_S3_PKfPKT0_PfPS1_PKT_llllllf
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 104 registers, used 0 barriers
+ptxas info    : Compile time = 49.460 ms
+ptxas info    : Compiling entry function '_ZN54_GLOBAL__N__9d958594_13_gdn_decode_cu_8075afd6_177842122gdn_decode_warp_kernelIifLb1ELi8EEEvPK13__nv_bfloat16S3_S3_PKfPKT0_PfPS1_PKT_llllllf' for 'sm_90'
+ptxas info    : Function properties for _ZN54_GLOBAL__N__9d958594_13_gdn_decode_cu_8075afd6_177842122gdn_decode_warp_kernelIifLb1ELi8EEEvPK13__nv_bfloat16S3_S3_PKfPKT0_PfPS1_PKT_llllllf
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 62 registers, used 0 barriers
+ptxas info    : Compile time = 31.235 ms
+ptxas info    : Compiling entry function '_ZN54_GLOBAL__N__9d958594_13_gdn_decode_cu_8075afd6_177842122gdn_decode_warp_kernelIifLb1ELi4EEEvPK13__nv_bfloat16S3_S3_PKfPKT0_PfPS1_PKT_llllllf' for 'sm_90'
+ptxas info    : Function properties for _ZN54_GLOBAL__N__9d958594_13_gdn_decode_cu_8075afd6_177842122gdn_decode_warp_kernelIifLb1ELi4EEEvPK13__nv_bfloat16S3_S3_PKfPKT0_PfPS1_PKT_llllllf
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 40 registers, used 0 barriers
+ptxas info    : Compile time = 23.313 ms
+ptxas info    : Compiling entry function '_ZN54_GLOBAL__N__9d958594_13_gdn_decode_cu_8075afd6_177842122gdn_decode_warp_kernelIl13__nv_bfloat16Lb0ELi16EEEvPKS1_S3_S3_PKfPKT0_PfPS1_PKT_llllllf' for 'sm_90'
+ptxas info    : Function properties for _ZN54_GLOBAL__N__9d958594_13_gdn_decode_cu_8075afd6_177842122gdn_decode_warp_kernelIl13__nv_bfloat16Lb0ELi16EEEvPKS1_S3_S3_PKfPKT0_PfPS1_PKT_llllllf
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 104 registers, used 0 barriers
+ptxas info    : Compile time = 44.229 ms
+ptxas info    : Compiling entry function '_ZN54_GLOBAL__N__9d958594_13_gdn_decode_cu_8075afd6_177842122gdn_decode_warp_kernelIl13__nv_bfloat16Lb0ELi8EEEvPKS1_S3_S3_PKfPKT0_PfPS1_PKT_llllllf' for 'sm_90'
+ptxas info    : Function properties for _ZN54_GLOBAL__N__9d958594_13_gdn_decode_cu_8075afd6_177842122gdn_decode_warp_kernelIl13__nv_bfloat16Lb0ELi8EEEvPKS1_S3_S3_PKfPKT0_PfPS1_PKT_llllllf
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 62 registers, used 0 barriers
+ptxas info    : Compile time = 26.708 ms
+ptxas info    : Compiling entry function '_ZN54_GLOBAL__N__9d958594_13_gdn_decode_cu_8075afd6_177842122gdn_decode_warp_kernelIl13__nv_bfloat16Lb0ELi4EEEvPKS1_S3_S3_PKfPKT0_PfPS1_PKT_llllllf' for 'sm_90'
+ptxas info    : Function properties for _ZN54_GLOBAL__N__9d958594_13_gdn_decode_cu_8075afd6_177842122gdn_decode_warp_kernelIl13__nv_bfloat16Lb0ELi4EEEvPKS1_S3_S3_PKfPKT0_PfPS1_PKT_llllllf
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 40 registers, used 0 barriers
+ptxas info    : Compile time = 18.525 ms
+ptxas info    : Compiling entry function '_ZN54_GLOBAL__N__9d958594_13_gdn_decode_cu_8075afd6_177842122gdn_decode_warp_kernelIl13__nv_bfloat16Lb1ELi16EEEvPKS1_S3_S3_PKfPKT0_PfPS1_PKT_llllllf' for 'sm_90'
+ptxas info    : Function properties for _ZN54_GLOBAL__N__9d958594_13_gdn_decode_cu_8075afd6_177842122gdn_decode_warp_kernelIl13__nv_bfloat16Lb1ELi16EEEvPKS1_S3_S3_PKfPKT0_PfPS1_PKT_llllllf
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 104 registers, used 0 barriers
+ptxas info    : Compile time = 49.578 ms
+ptxas info    : Compiling entry function '_ZN54_GLOBAL__N__9d958594_13_gdn_decode_cu_8075afd6_177842122gdn_decode_warp_kernelIl13__nv_bfloat16Lb1ELi8EEEvPKS1_S3_S3_PKfPKT0_PfPS1_PKT_llllllf' for 'sm_90'
+ptxas info    : Function properties for _ZN54_GLOBAL__N__9d958594_13_gdn_decode_cu_8075afd6_177842122gdn_decode_warp_kernelIl13__nv_bfloat16Lb1ELi8EEEvPKS1_S3_S3_PKfPKT0_PfPS1_PKT_llllllf
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 62 registers, used 0 barriers
+ptxas info    : Compile time = 33.457 ms
+ptxas info    : Compiling entry function '_ZN54_GLOBAL__N__9d958594_13_gdn_decode_cu_8075afd6_177842122gdn_decode_warp_kernelIl13__nv_bfloat16Lb1ELi4EEEvPKS1_S3_S3_PKfPKT0_PfPS1_PKT_llllllf' for 'sm_90'
+ptxas info    : Function properties for _ZN54_GLOBAL__N__9d958594_13_gdn_decode_cu_8075afd6_177842122gdn_decode_warp_kernelIl13__nv_bfloat16Lb1ELi4EEEvPKS1_S3_S3_PKfPKT0_PfPS1_PKT_llllllf
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 40 registers, used 0 barriers
+ptxas info    : Compile time = 24.057 ms
+ptxas info    : Compiling entry function '_ZN54_GLOBAL__N__9d958594_13_gdn_decode_cu_8075afd6_177842122gdn_decode_warp_kernelIlfLb0ELi16EEEvPK13__nv_bfloat16S3_S3_PKfPKT0_PfPS1_PKT_llllllf' for 'sm_90'
+ptxas info    : Function properties for _ZN54_GLOBAL__N__9d958594_13_gdn_decode_cu_8075afd6_177842122gdn_decode_warp_kernelIlfLb0ELi16EEEvPK13__nv_bfloat16S3_S3_PKfPKT0_PfPS1_PKT_llllllf
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 104 registers, used 0 barriers
+ptxas info    : Compile time = 44.544 ms
+ptxas info    : Compiling entry function '_ZN54_GLOBAL__N__9d958594_13_gdn_decode_cu_8075afd6_177842122gdn_decode_warp_kernelIlfLb0ELi8EEEvPK13__nv_bfloat16S3_S3_PKfPKT0_PfPS1_PKT_llllllf' for 'sm_90'
+ptxas info    : Function properties for _ZN54_GLOBAL__N__9d958594_13_gdn_decode_cu_8075afd6_177842122gdn_decode_warp_kernelIlfLb0ELi8EEEvPK13__nv_bfloat16S3_S3_PKfPKT0_PfPS1_PKT_llllllf
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 62 registers, used 0 barriers
+ptxas info    : Compile time = 26.556 ms
+ptxas info    : Compiling entry function '_ZN54_GLOBAL__N__9d958594_13_gdn_decode_cu_8075afd6_177842122gdn_decode_warp_kernelIlfLb0ELi4EEEvPK13__nv_bfloat16S3_S3_PKfPKT0_PfPS1_PKT_llllllf' for 'sm_90'
+ptxas info    : Function properties for _ZN54_GLOBAL__N__9d958594_13_gdn_decode_cu_8075afd6_177842122gdn_decode_warp_kernelIlfLb0ELi4EEEvPK13__nv_bfloat16S3_S3_PKfPKT0_PfPS1_PKT_llllllf
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 40 registers, used 0 barriers
+ptxas info    : Compile time = 18.490 ms
+ptxas info    : Compiling entry function '_ZN54_GLOBAL__N__9d958594_13_gdn_decode_cu_8075afd6_177842122gdn_decode_warp_kernelIlfLb1ELi16EEEvPK13__nv_bfloat16S3_S3_PKfPKT0_PfPS1_PKT_llllllf' for 'sm_90'
+ptxas info    : Function properties for _ZN54_GLOBAL__N__9d958594_13_gdn_decode_cu_8075afd6_177842122gdn_decode_warp_kernelIlfLb1ELi16EEEvPK13__nv_bfloat16S3_S3_PKfPKT0_PfPS1_PKT_llllllf
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 104 registers, used 0 barriers
+ptxas info    : Compile time = 49.359 ms
+ptxas info    : Compiling entry function '_ZN54_GLOBAL__N__9d958594_13_gdn_decode_cu_8075afd6_177842122gdn_decode_warp_kernelIlfLb1ELi8EEEvPK13__nv_bfloat16S3_S3_PKfPKT0_PfPS1_PKT_llllllf' for 'sm_90'
+ptxas info    : Function properties for _ZN54_GLOBAL__N__9d958594_13_gdn_decode_cu_8075afd6_177842122gdn_decode_warp_kernelIlfLb1ELi8EEEvPK13__nv_bfloat16S3_S3_PKfPKT0_PfPS1_PKT_llllllf
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 62 registers, used 0 barriers
+ptxas info    : Compile time = 31.435 ms
+ptxas info    : Compiling entry function '_ZN54_GLOBAL__N__9d958594_13_gdn_decode_cu_8075afd6_177842122gdn_decode_warp_kernelIlfLb1ELi4EEEvPK13__nv_bfloat16S3_S3_PKfPKT0_PfPS1_PKT_llllllf' for 'sm_90'
+ptxas info    : Function properties for _ZN54_GLOBAL__N__9d958594_13_gdn_decode_cu_8075afd6_177842122gdn_decode_warp_kernelIlfLb1ELi4EEEvPK13__nv_bfloat16S3_S3_PKfPKT0_PfPS1_PKT_llllllf
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 40 registers, used 0 barriers
+ptxas info    : Compile time = 23.964 ms
+ptxas info    : Compiling entry function '_ZN3cub16_V_300200_SM_9006detail11EmptyKernelIvEEvv' for 'sm_90'
+ptxas info    : Function properties for _ZN3cub16_V_300200_SM_9006detail11EmptyKernelIvEEvv
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 4 registers, used 0 barriers
+ptxas info    : Compile time = 0.550 ms
+[2/2] c++ gdn_decode.cuda.o -shared -L<python-env>/lib/python3.14/site-packages/torch/lib -lc10 -lc10_cuda -ltorch_cpu -ltorch_cuda -ltorch -ltorch_python -L/usr/local/cuda/lib64 -lcudart -o qwen_gdn_decode.so

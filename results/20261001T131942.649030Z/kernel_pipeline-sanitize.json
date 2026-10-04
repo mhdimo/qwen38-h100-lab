@@ -1,0 +1,46 @@
+{
+  "status": "complete",
+  "profiled": true,
+  "gpu_before": "name, uuid, driver_version, memory.total [MiB], memory.used [MiB], utilization.gpu [%], power.draw [W], power.limit [W], clocks.current.sm [MHz], clocks.current.memory [MHz], temperature.gpu\nNVIDIA H100 80GB HBM3, GPU-redacted, 610.57.04, 81559 MiB, 0 MiB, 0 %, 71.55 W, 700.00 W, 345 MHz, 2619 MHz, 34",
+  "commands": [
+    {
+      "name": "memcheck",
+      "command": [
+        "/usr/local/cuda/bin/compute-sanitizer",
+        "--tool",
+        "memcheck",
+        "--error-exitcode",
+        "99",
+        "--kernel-name",
+        "kns=gdn_pipeline_kernel",
+        "<python-env>/bin/python",
+        "-m",
+        "pipeline_pass.sanitize",
+        "--output",
+        "qwen38-h100-lab/results/20261001T131942.649030Z/memcheck.json"
+      ],
+      "status": "complete",
+      "exit_code": 0
+    },
+    {
+      "name": "racecheck",
+      "command": [
+        "/usr/local/cuda/bin/compute-sanitizer",
+        "--tool",
+        "racecheck",
+        "--error-exitcode",
+        "99",
+        "--kernel-name",
+        "kns=gdn_pipeline_kernel",
+        "<python-env>/bin/python",
+        "-m",
+        "pipeline_pass.sanitize",
+        "--output",
+        "qwen38-h100-lab/results/20261001T131942.649030Z/racecheck.json"
+      ],
+      "status": "complete",
+      "exit_code": 0
+    }
+  ],
+  "gpu_after": "name, uuid, driver_version, memory.total [MiB], memory.used [MiB], utilization.gpu [%], power.draw [W], power.limit [W], clocks.current.sm [MHz], clocks.current.memory [MHz], temperature.gpu\nNVIDIA H100 80GB HBM3, GPU-redacted, 610.57.04, 81559 MiB, 0 MiB, 0 %, 133.54 W, 700.00 W, 1980 MHz, 2619 MHz, 36"
+}

@@ -1,0 +1,15 @@
+[
+  {
+    "config": "kernel_pipeline-profile",
+    "exit_code": 1,
+    "command": [
+      "<python-env>/bin/python",
+      "-m",
+      "pipeline_pass.diagnostics",
+      "--action",
+      "profile",
+      "--output",
+      "qwen38-h100-lab/results/20261001T131601.992791Z/kernel_pipeline-profile.json"
+    ]
+  }
+]

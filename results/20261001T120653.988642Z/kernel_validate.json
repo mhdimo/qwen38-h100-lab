@@ -1,0 +1,16 @@
+{
+  "status": "failed",
+  "action": "validate",
+  "started_at": "2026-10-01T12:06:54.085073+00:00",
+  "gpu": "name, uuid, driver_version, memory.total [MiB], memory.used [MiB], utilization.gpu [%], power.draw [W], power.limit [W], clocks.current.sm [MHz], clocks.current.memory [MHz], temperature.gpu\nNVIDIA H100 80GB HBM3, GPU-redacted, 610.57.04, 81559 MiB, 0 MiB, 0 %, 70.46 W, 700.00 W, 345 MHz, 2619 MHz, 32",
+  "source_sha256": {
+    "silu_mul_fp8.cu": "0d6575f049f976fce48c1991766bde7176b13182b81c075190c714bb5419f5ea",
+    "experiment.py": "c819eee3466af6afe9bab428e078ce3d82f3063c7b8553b8174acad670eb2216",
+    "silu_mul_fp8.py": "8d9eddcf6cacff830633772c4307f2b0ec36616d5f38df8cc3b3008ae38abf90",
+    "integration.py": "006ed937d29fb48cb4e97129e409ee330f6e397940024847945d4a4224595625",
+    "worker.py": "e6dcd5d479f7455cbea0c18b3336dec47e412c534773474bd753c91c2d823736"
+  },
+  "torch": "2.11.0+cu130",
+  "error": "AssertionError('FP8 bytes differ: seed=0 M=7 N=17408 random ub=0.001')",
+  "finished_at": "2026-10-01T12:07:19.646805+00:00"
+}

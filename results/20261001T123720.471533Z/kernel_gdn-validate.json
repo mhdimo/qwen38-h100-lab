@@ -1,0 +1,8 @@
+{
+  "status": "failed",
+  "action": "validate",
+  "started_at": "2026-10-01T12:37:20.574018+00:00",
+  "gpu": "name, uuid, driver_version, memory.total [MiB], memory.used [MiB], utilization.gpu [%], power.draw [W], power.limit [W], clocks.current.sm [MHz], clocks.current.memory [MHz], temperature.gpu\nNVIDIA H100 80GB HBM3, GPU-redacted, 610.57.04, 81559 MiB, 0 MiB, 0 %, 70.18 W, 700.00 W, 345 MHz, 2619 MHz, 32",
+  "error": "AssertionError('Custom GDN kernel not implemented')",
+  "finished_at": "2026-10-01T12:37:20.601537+00:00"
+}

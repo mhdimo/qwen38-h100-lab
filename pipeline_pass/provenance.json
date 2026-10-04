@@ -1,0 +1,16 @@
+{
+  "gpu": "name, uuid, driver_version, memory.total [MiB], memory.used [MiB], utilization.gpu [%], power.draw [W], power.limit [W], clocks.current.sm [MHz], clocks.current.memory [MHz], temperature.gpu\nNVIDIA H100 80GB HBM3, GPU-redacted, 610.57.04, 81559 MiB, 0 MiB, 0 %, 71.62 W, 700.00 W, 345 MHz, 2619 MHz, 33",
+  "reference_path": "<python-env>/lib/python3.14/site-packages/vllm/third_party/flash_linear_attention/ops/fused_recurrent.py",
+  "reference_sha256": "3a2a3c5245acba127af326f0b3f287b352776a8eb1e1f6e40c24a767fae3c2ef",
+  "versions": {
+    "torch": "2.11.0",
+    "vllm": "0.26.0",
+    "triton": "3.6.0",
+    "flashinfer-python": "0.6.14",
+    "transformers": "5.16.1"
+  },
+  "cuda_source_sha256": "381aba10863e7bf8712c2945446e68dab55b4a23596ab1aaea5b5df3e75fd22d",
+  "counter_policy": "RmProfilingAdminOnly: 1",
+  "nsys": "NVIDIA Nsight Systems version 2025.6.3.541-256337736014v0\n",
+  "ncu": "NVIDIA (R) Nsight Compute Command Line Profiler\nCopyright (c) 2018-2026 NVIDIA Corporation\nVersion 2026.1.1.0 (build 37634170) (public-release)\n"
+}

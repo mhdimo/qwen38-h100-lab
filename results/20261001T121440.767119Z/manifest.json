@@ -1,0 +1,34 @@
+[
+  {
+    "config": "batch64_t16384",
+    "exit_code": 0,
+    "command": [
+      "<python-env>/bin/python",
+      "qwen38-h100-lab/benchmark.py",
+      "--config",
+      "qwen38-h100-lab/configs/batch64_t16384.json",
+      "--workloads",
+      "qwen38-h100-lab/workloads.json",
+      "--output",
+      "qwen38-h100-lab/results/20261001T121440.767119Z/batch64_t16384.json",
+      "--repetitions",
+      "2"
+    ]
+  },
+  {
+    "config": "batch64_t16384_custom_silu",
+    "exit_code": 0,
+    "command": [
+      "<python-env>/bin/python",
+      "qwen38-h100-lab/benchmark.py",
+      "--config",
+      "qwen38-h100-lab/configs/batch64_t16384_custom_silu.json",
+      "--workloads",
+      "qwen38-h100-lab/workloads.json",
+      "--output",
+      "qwen38-h100-lab/results/20261001T121440.767119Z/batch64_t16384_custom_silu.json",
+      "--repetitions",
+      "2"
+    ]
+  }
+]

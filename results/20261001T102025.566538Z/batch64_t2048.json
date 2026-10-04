@@ -1,0 +1,98 @@
+{
+  "started_at": "2026-10-01T10:22:26.031990+00:00",
+  "config": {
+    "name": "batch64_t2048",
+    "description": "64 sequences, 16 GiB cache, 2048 scheduled tokens, decode graph sizes for concurrency.",
+    "engine": {
+      "max_num_seqs": 64,
+      "max_num_batched_tokens": 2048,
+      "kv_cache_memory_bytes": 17179869184,
+      "compilation_config": {
+        "cudagraph_mode": "FULL_AND_PIECEWISE",
+        "cudagraph_capture_sizes": [
+          1,
+          2,
+          4,
+          8,
+          16,
+          24,
+          32,
+          48,
+          64
+        ],
+        "max_cudagraph_capture_size": 64,
+        "cudagraph_mm_encoder": false
+      }
+    }
+  },
+  "engine_options": {
+    "model": "~/.cache/huggingface/hub/models--Qwen--Qwen3.8-27B-FP8/snapshots/017b9c7af6b5689d5dd426a76e0bc077eb5ca20a",
+    "tensor_parallel_size": 1,
+    "max_model_len": 10240,
+    "gpu_memory_utilization": 0.85,
+    "enforce_eager": false,
+    "enable_prefix_caching": true,
+    "enable_chunked_prefill": true,
+    "disable_log_stats": false,
+    "seed": 0,
+    "mm_processor_cache_gb": 1,
+    "mm_processor_kwargs": {
+      "min_pixels": 1024,
+      "max_pixels": 2621440
+    },
+    "limit_mm_per_prompt": {
+      "video": 1,
+      "image": 1
+    },
+    "max_num_seqs": 64,
+    "max_num_batched_tokens": 2048,
+    "kv_cache_memory_bytes": 17179869184,
+    "compilation_config": {
+      "cudagraph_mode": "FULL_AND_PIECEWISE",
+      "cudagraph_capture_sizes": [
+        1,
+        2,
+        4,
+        8,
+        16,
+        24,
+        32,
+        48,
+        64
+      ],
+      "max_cudagraph_capture_size": 64,
+      "cudagraph_mm_encoder": false
+    }
+  },
+  "gpu_before": "name, uuid, driver_version, memory.total [MiB], memory.used [MiB], utilization.gpu [%], power.draw [W], power.limit [W], clocks.current.sm [MHz], clocks.current.memory [MHz], temperature.gpu\nNVIDIA H100 80GB HBM3, GPU-redacted, 610.57.04, 81559 MiB, 0 MiB, 0 %, 71.14 W, 700.00 W, 345 MHz, 2619 MHz, 34",
+  "versions": {
+    "vllm": "0.26.0",
+    "torch": "2.11.0",
+    "triton": "3.6.0",
+    "transformers": "5.16.1",
+    "flashinfer-python": "0.6.14"
+  },
+  "method": "AsyncLLM direct, closed-loop concurrency, cumulative output, fixed length, seeded unique cold prompts. TTFT includes scheduler queue. TPOT=(completion-first token)/(output count-1).",
+  "profiled": false,
+  "source_sha256": {
+    "benchmark.py": "71e4b9116e7bd2bba8fe31b7acbe5c6a5a22f669605ddd9bda8382fac7fbfcc1",
+    "measurement.py": "8d71573f55c9ae5fec49e4acd934289f967b7156d817345190201444ab82942c",
+    "batch64_t2048.json": "f42e650c0cddc0695c7a39d51de031a28853a185db9d5f8c8f9d87ea9084dee4",
+    "workloads.json": "e8cd941fe40af5338d53802c6be9149eed2f7710c586a8ec2b06e533847223f7"
+  },
+  "status": "cancelled",
+  "results": [],
+  "cancellation": {
+    "time": "2026-10-01T11:43:15.225551+00:00",
+    "reason": "User requested cancellation and local transfer",
+    "owned_pids": [
+      1772846,
+      1773568,
+      1773570,
+      1773683,
+      1773860,
+      1773861
+    ],
+    "remaining_live_pids": []
+  }
+}

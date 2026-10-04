@@ -1,0 +1,251 @@
+{
+  "total_kernel_ms": 156.084002,
+  "kernels": [
+    {
+      "name": "void deep_gemm::sm90_fp8_gemm_1d2d_impl<(cute::UMMA::Major)0, 0u, 34816u, 5120u, 1u, 32u, 144u, 128u, 128u, 128u, 32u, 9u, 128u, 128u, 2u, false, 132u, (deep_gemm::GemmType)0, cutlass::bfloat16_t, deep_gemm::epilogue::transform::EpilogueIdentity>(float*, int*, unsigned int, unsigned int, unsigned int, CUtensorMap_st, CUtensorMap_st, CUtensorMap_st, CUtensorMap_st)",
+      "count": 640,
+      "total_ms": 43.672941,
+      "mean_us": 68.2389703125,
+      "percent_kernel_time": 27.980408267594264
+    },
+    {
+      "name": "fused_recurrent_gated_delta_rule_packed_decode_kernel",
+      "count": 480,
+      "total_ms": 31.921594000000002,
+      "mean_us": 66.50332083333333,
+      "percent_kernel_time": 20.451547622414243
+    },
+    {
+      "name": "void deep_gemm::sm90_fp8_gemm_1d2d_impl<(cute::UMMA::Major)0, 0u, 5120u, 17408u, 1u, 32u, 48u, 128u, 128u, 128u, 32u, 16u, 128u, 128u, 1u, false, 132u, (deep_gemm::GemmType)0, cutlass::bfloat16_t, deep_gemm::epilogue::transform::EpilogueIdentity>(float*, int*, unsigned int, unsigned int, unsigned int, CUtensorMap_st, CUtensorMap_st, CUtensorMap_st, CUtensorMap_st)",
+      "count": 640,
+      "total_ms": 23.711112,
+      "mean_us": 37.048612500000004,
+      "percent_kernel_time": 15.19125067026408
+    },
+    {
+      "name": "void deep_gemm::sm90_fp8_gemm_1d2d_impl<(cute::UMMA::Major)0, 0u, 16384u, 5120u, 1u, 32u, 128u, 128u, 128u, 128u, 128u, 10u, 128u, 128u, 1u, false, 132u, (deep_gemm::GemmType)0, cutlass::bfloat16_t, deep_gemm::epilogue::transform::EpilogueIdentity>(float*, int*, unsigned int, unsigned int, unsigned int, CUtensorMap_st, CUtensorMap_st, CUtensorMap_st, CUtensorMap_st)",
+      "count": 480,
+      "total_ms": 15.108951999999999,
+      "mean_us": 31.476983333333333,
+      "percent_kernel_time": 9.680013202121764
+    },
+    {
+      "name": "void deep_gemm::sm90_fp8_gemm_1d2d_impl<(cute::UMMA::Major)0, 0u, 5120u, 6144u, 1u, 32u, 48u, 128u, 128u, 128u, 32u, 16u, 128u, 128u, 1u, false, 132u, (deep_gemm::GemmType)0, cutlass::bfloat16_t, deep_gemm::epilogue::transform::EpilogueIdentity>(float*, int*, unsigned int, unsigned int, unsigned int, CUtensorMap_st, CUtensorMap_st, CUtensorMap_st, CUtensorMap_st)",
+      "count": 640,
+      "total_ms": 11.60727,
+      "mean_us": 18.136359375,
+      "percent_kernel_time": 7.436553299037015
+    },
+    {
+      "name": "void per_token_group_quant_8bit_kernel<c10::BFloat16, c10::Float8_e4m3fn, true, true, float>(c10::BFloat16 const*, void*, float*, int, int, int, float, float, float, int, int)",
+      "count": 1920,
+      "total_ms": 5.3126050000000005,
+      "mean_us": 2.7669817708333335,
+      "percent_kernel_time": 3.4036832294958708
+    },
+    {
+      "name": "void deep_gemm::sm90_fp8_gemm_1d2d_impl<(cute::UMMA::Major)0, 0u, 14336u, 5120u, 1u, 32u, 112u, 128u, 128u, 128u, 32u, 12u, 128u, 128u, 1u, false, 132u, (deep_gemm::GemmType)0, cutlass::bfloat16_t, deep_gemm::epilogue::transform::EpilogueIdentity>(float*, int*, unsigned int, unsigned int, unsigned int, CUtensorMap_st, CUtensorMap_st, CUtensorMap_st, CUtensorMap_st)",
+      "count": 160,
+      "total_ms": 4.573881999999999,
+      "mean_us": 28.5867625,
+      "percent_kernel_time": 2.9303976970042065
+    },
+    {
+      "name": "void vllm::silu_and_mul_per_block_quant_kernel<c10::BFloat16, c10::Float8_e4m3fn, true, 128>(c10::Float8_e4m3fn*, float*, c10::BFloat16 const*, float const*, int)",
+      "count": 640,
+      "total_ms": 3.2809,
+      "mean_us": 5.1264062500000005,
+      "percent_kernel_time": 2.1020091476127067
+    },
+    {
+      "name": "nvjet_sm90_tst_32x64_64x16_4x1_v_bz_splitK_TNN",
+      "count": 480,
+      "total_ms": 2.532046,
+      "mean_us": 5.275095833333333,
+      "percent_kernel_time": 1.6222328794465428
+    },
+    {
+      "name": "void cutlass::device_kernel<flash::enable_sm90_or_later<flash::FlashAttnFwdSm90<flash::CollectiveMainloopFwdSm90<2, cute::tuple<cute::C<1>, cute::C<1>, cute::C<1> >, cute::tuple<cute::C<128>, cute::C<80>, cute::C<256> >, 256, cutlass::bfloat16_t, float, cutlass::arch::Sm90, false, false, false, true, true, false, false, true, true, true, true, false, cutlass::bfloat16_t, 1>, flash::CollectiveEpilogueFwd<cute::tuple<cute::C<128>, cute::C<256>, cute::C<80> >, cute::tuple<cute::C<1>, cute::C<1>, cute::C<1> >, cutlass::bfloat16_t, cutlass::arch::Sm90, 256, true, true, true, false, 1>, flash::VarlenDynamicPersistentTileScheduler<128, 80, 256, 128, true, true, true, false, false, true> > > >(flash::enable_sm90_or_later<flash::FlashAttnFwdSm90<flash::CollectiveMainloopFwdSm90<2, cute::tuple<cute::C<1>, cute::C<1>, cute::C<1> >, cute::tuple<cute::C<128>, cute::C<80>, cute::C<256> >, 256, cutlass::bfloat16_t, float, cutlass::arch::Sm90, false, false, false, true, true, false, false, true, true, true, true, false, cutlass::bfloat16_t, 1>, flash::CollectiveEpilogueFwd<cute::tuple<cute::C<128>, cute::C<256>, cute::C<80> >, cute::tuple<cute::C<1>, cute::C<1>, cute::C<1> >, cutlass::bfloat16_t, cutlass::arch::Sm90, 256, true, true, true, false, 1>, flash::VarlenDynamicPersistentTileScheduler<128, 80, 256, 128, true, true, true, false, false, true> > >::Params)",
+      "count": 160,
+      "total_ms": 2.170858,
+      "mean_us": 13.5678625,
+      "percent_kernel_time": 1.3908267165010288
+    },
+    {
+      "name": "_causal_conv1d_update_kernel",
+      "count": 480,
+      "total_ms": 1.7310969999999999,
+      "mean_us": 3.606452083333333,
+      "percent_kernel_time": 1.1090803527705548
+    },
+    {
+      "name": "triton_red_fused__to_copy_add_fused_add_rms_norm_per_token_group_fp8_quant_2",
+      "count": 480,
+      "total_ms": 1.4100039999999998,
+      "mean_us": 2.937508333333333,
+      "percent_kernel_time": 0.9033622805237912
+    },
+    {
+      "name": "triton_red_fused__to_copy_add_fused_add_rms_norm_3",
+      "count": 320,
+      "total_ms": 1.1216590000000002,
+      "mean_us": 3.5051843750000002,
+      "percent_kernel_time": 0.7186252182334485
+    },
+    {
+      "name": "triton_poi_fused__to_copy__unsafe_view_add_clone_mean_mul_per_token_group_fp8_quant_pow_rsqrt_silu_view_1",
+      "count": 480,
+      "total_ms": 1.10345,
+      "mean_us": 2.2988541666666666,
+      "percent_kernel_time": 0.7069590642607946
+    },
+    {
+      "name": "void cublasLt::splitKreduce_kernel<32, 16, int, float, __nv_bfloat16, float, __nv_bfloat16, false, float, __nv_bfloat16, __nv_bfloat16, true, false, false, false>(cublasLt::cublasSplitKParams<float>, float const*, __nv_bfloat16 const*, float*, __nv_bfloat16*, float const*, float const*, __nv_bfloat16 const*, float const*, __nv_bfloat16*, void*, long, float*, int*, float*, float*, float const*, float const*, float const*, float const*, float const*)",
+      "count": 480,
+      "total_ms": 0.836893,
+      "mean_us": 1.7435270833333334,
+      "percent_kernel_time": 0.5361811519927584
+    },
+    {
+      "name": "triton_per_fused__to_copy_mean_pow_view_0",
+      "count": 480,
+      "total_ms": 0.7814690000000001,
+      "mean_us": 1.6280604166666668,
+      "percent_kernel_time": 0.5006720675960116
+    },
+    {
+      "name": "triton_poi_fused_clone_copy_index_select_slice_split_6",
+      "count": 160,
+      "total_ms": 0.582144,
+      "mean_us": 3.6384,
+      "percent_kernel_time": 0.37296839685081884
+    },
+    {
+      "name": "triton_red_fused__to_copy_add_fused_add_rms_norm_2",
+      "count": 160,
+      "total_ms": 0.552693,
+      "mean_us": 3.45433125,
+      "percent_kernel_time": 0.3540997110004906
+    },
+    {
+      "name": "triton_red_fused__to_copy_add_fused_add_rms_norm_per_token_group_fp8_quant_3",
+      "count": 160,
+      "total_ms": 0.550778,
+      "mean_us": 3.4423625,
+      "percent_kernel_time": 0.35287280755397343
+    },
+    {
+      "name": "triton_poi_fused_4",
+      "count": 480,
+      "total_ms": 0.547605,
+      "mean_us": 1.14084375,
+      "percent_kernel_time": 0.35083992784859525
+    },
+    {
+      "name": "triton_red_fused__to_copy_add_fused_add_rms_norm_per_token_group_fp8_quant_1",
+      "count": 160,
+      "total_ms": 0.43369,
+      "mean_us": 2.7105625,
+      "percent_kernel_time": 0.2778567914987213
+    },
+    {
+      "name": "void vllm::reshape_and_cache_flash_kernel<__nv_bfloat16, __nv_bfloat16, (vllm::Fp8KVCacheDataType)0>(__nv_bfloat16 const*, __nv_bfloat16 const*, __nv_bfloat16*, __nv_bfloat16*, long const*, long, long, long, long, long, int, int, int, float const*, float const*, int)",
+      "count": 160,
+      "total_ms": 0.37218900000000005,
+      "mean_us": 2.3261812500000003,
+      "percent_kernel_time": 0.23845429078631647
+    },
+    {
+      "name": "void cutlass::device_kernel<flash::FlashAttnFwdCombine<cute::tuple<cute::C<8>, cute::C<128> >, 5, 256, 1, false, true, cutlass::bfloat16_t, float, cutlass::arch::Sm90> >(flash::FlashAttnFwdCombine<cute::tuple<cute::C<8>, cute::C<128> >, 5, 256, 1, false, true, cutlass::bfloat16_t, float, cutlass::arch::Sm90>::Params)",
+      "count": 160,
+      "total_ms": 0.36931400000000003,
+      "mean_us": 2.3082125000000002,
+      "percent_kernel_time": 0.23661233391491332
+    },
+    {
+      "name": "triton_poi_fused_zeros_5",
+      "count": 320,
+      "total_ms": 0.34726100000000004,
+      "mean_us": 1.085190625,
+      "percent_kernel_time": 0.22248340352011223
+    },
+    {
+      "name": "triton_poi_fused_8",
+      "count": 160,
+      "total_ms": 0.341694,
+      "mean_us": 2.1355875,
+      "percent_kernel_time": 0.2189167343364248
+    },
+    {
+      "name": "triton_poi_fused_7",
+      "count": 160,
+      "total_ms": 0.25317500000000004,
+      "mean_us": 1.5823437500000002,
+      "percent_kernel_time": 0.162204323797387
+    },
+    {
+      "name": "triton_red_fused_5",
+      "count": 160,
+      "total_ms": 0.247359,
+      "mean_us": 1.54599375,
+      "percent_kernel_time": 0.15847812513161982
+    },
+    {
+      "name": "triton_poi_fused_mul_per_token_group_fp8_quant_sigmoid_view_0",
+      "count": 160,
+      "total_ms": 0.245119,
+      "mean_us": 1.53199375,
+      "percent_kernel_time": 0.15704300047355269
+    },
+    {
+      "name": "triton_poi_fused_zeros_4",
+      "count": 150,
+      "total_ms": 0.162429,
+      "mean_us": 1.08286,
+      "percent_kernel_time": 0.10406511744874404
+    },
+    {
+      "name": "triton_poi_fused_3",
+      "count": 150,
+      "total_ms": 0.155804,
+      "mean_us": 1.0386933333333332,
+      "percent_kernel_time": 0.0998206081363803
+    },
+    {
+      "name": "triton_red_fused_1",
+      "count": 10,
+      "total_ms": 0.024352,
+      "mean_us": 2.4352,
+      "percent_kernel_time": 0.015601855211272707
+    },
+    {
+      "name": "triton_poi_fused_2",
+      "count": 10,
+      "total_ms": 0.01168,
+      "mean_us": 1.168,
+      "percent_kernel_time": 0.0074831500027786315
+    },
+    {
+      "name": "triton_poi_fused_0",
+      "count": 10,
+      "total_ms": 0.009984,
+      "mean_us": 0.9984,
+      "percent_kernel_time": 0.006396555618813515
+    }
+  ],
+  "interpretation": "Sum of kernel durations, not exclusive wall time; concurrent kernels may overlap.",
+  "selection": "GPU kernels sharing cudaGraphLaunch correlation IDs with packed recurrent decode; excludes prompt processing",
+  "launch_correlations": [
+    398088,
+    399308,
+    400522,
+    401736,
+    402950,
+    404164,
+    405378,
+    406592,
+    407806,
+    409020
+  ],
+  "source": "results/20261001T115943.440807Z/traces/prefill_profile_rank0.1790856091061192347.pt.trace.json.gz"
+}

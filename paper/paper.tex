@@ -1,0 +1,408 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[margin=21mm,headheight=14pt]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern,microtype,amsmath,booktabs,tabularx,array}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{graphicx,pgfplots}
+\usepgfplotslibrary{groupplots}
+\pgfplotsset{compat=1.18}
+\usepackage{enumitem,fancyhdr,caption}
+\usepackage[colorlinks=true,linkcolor=MidnightBlue,urlcolor=MidnightBlue,citecolor=MidnightBlue]{hyperref}
+\definecolor{baseline}{HTML}{707D8C}
+\definecolor{batcha}{HTML}{258B9C}
+\definecolor{batchb}{HTML}{D6773E}
+\pagestyle{fancy}\fancyhf{}
+\fancyhead[L]{\small Mihal Dimo / Qwen3.8-27B on H100}
+\fancyhead[R]{\small Experimental report -- 1 October 2026}
+\fancyfoot[C]{\small\thepage}
+\setlength{\parindent}{0pt}\setlength{\parskip}{5pt}
+\setlength{\tabcolsep}{5pt}
+\renewcommand{\arraystretch}{1.15}
+\captionsetup{font=small,labelfont=bf}
+\setlist[itemize]{leftmargin=*,itemsep=2pt,topsep=2pt}
+\newcommand{\code}[1]{\texttt{\small #1}}
+\input{metrics.tex}
+\title{\vspace{-12mm}\textbf{From Single-Request Inference to Concurrent Serving}\\[3pt]
+\large Throughput--Latency Tradeoffs for Qwen3.8-27B on an H100}
+\author{Mihal Dimo\\\small\href{https://github.com/mhdimo/qwen38-h100-lab}{github.com/mhdimo/qwen38-h100-lab}}
+\date{1 October 2026}
+
+\begin{document}
+\maketitle\thispagestyle{fancy}
+\vspace{-6mm}
+\begin{abstract}
+We evaluate an isolated concurrent-inference implementation for Qwen3.8-27B-FP8
+on one NVIDIA H100 80GB GPU. Inspection of the existing deployment reveals
+a one-sequence engine limit, a 2 GiB cache budget, and an application lock that
+rejects overlapping inference. Our implementation uses vLLM AsyncLLM with a
+64-sequence limit, 16 GiB cache, and CUDA-graph capture sizes for concurrent
+decoding. With 32 concurrent synthetic requests, the 16,384-token scheduling
+budget increases decode-heavy aggregate output throughput from
+\BaseDecode{} to \LargeDecode{} tokens/s (\DecodeSpeedup{}$\times$), and mixed
+throughput from \BaseMixed{} to \LargeMixed{} tokens/s (\MixedSpeedup{}$\times$).
+Prefill-heavy input throughput rises by \PrefillGain{}\%.
+These gains trade higher memory use and per-request token latency for much less
+queueing. Single-request first-token latency regresses. The comparison is between
+matched engine configurations under an asynchronous harness, not an HTTP
+production benchmark or a novel GPU-kernel implementation. Three configurations
+completed; later experiments were cancelled.
+\end{abstract}
+
+\section{System question and contribution}
+The objective is maximum aggregate throughput for many concurrent users, rather
+than minimum latency for one request. vLLM exposes batching and memory-management
+mechanisms for this purpose~\cite{pagedattention}. However, the existing
+application's admission policy prevents concurrent requests from reaching the
+engine. Optimizing a GPU kernel alone cannot remove that constraint.
+
+The contribution of this report is a reproducible local benchmark implementation,
+a measured comparison of engine policies, and a documented integration boundary.
+Across measured configurations we preserve the checkpoint, numerical formats,
+runtime and context limit. We do not claim a new attention algorithm, custom CUDA kernel, or universal
+fastest configuration.
+
+\begin{table}[h]
+\centering\small
+\caption{Deployed worker versus the proposed implementation.}
+\begin{tabularx}{\linewidth}{@{}l>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X@{}}
+\toprule
+Property & Current deployed worker & Proposed isolated implementation \\
+\midrule
+Request path & Synchronous \code{LLM.generate}; application busy lock & Bounded asynchronous request pool feeding \code{AsyncLLM} \\
+Sequence capacity & 1 & 64 \\
+Fixed cache budget & 2 GiB & 16 GiB \\
+Prefill token budget & 2,048 in reproduced baseline & 8,192 or 16,384 \\
+Compilation / graphs & Enabled; prefill-oriented captures through 2,048 & Enabled; captures through batch size 64 \\
+Deployment status & Existing service & Separate lab; not integrated into service \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\newpage
+\section{Experimental method}
+\subsection{Hardware, model and software}
+All inference ran on one isolated NVIDIA H100 80GB HBM3 with an observed
+700 W power limit and driver 610.57.04. The software stack was Python 3.14.6,
+vLLM 0.26.0, PyTorch 2.11.0, Triton 3.6.0, Transformers 5.16.1 and FlashInfer
+0.6.14. The cached checkpoint was \code{Qwen/Qwen3.8-27B-FP8}.\\
+Pinned revision: \code{017b9c7af6b5689d5dd426a76e0bc077eb5ca20a}.
+Qwen3.8-27B combines Gated DeltaNet and full-attention layers in the Qwen3.5
+architecture~\cite{qwen}. The native FP8 checkpoint and automatic BF16 cache
+format were unchanged; maximum context length was 10,240 tokens.
+
+Resolved logs identify FP8 DeepGEMM, FlashAttention 3, FlashInfer GDN prefill,
+asynchronous engine scheduling, and norm/activation quantization fusions.
+This is evidence of selected implementations, not a measurement of their
+individual time shares.
+
+\subsection{Baseline construction and fairness}
+Every measured configuration uses the same direct AsyncLLM client. The baseline
+reproduces the deployed engine's one-sequence limit, 2 GiB cache and graph policy.
+At client concurrency 32, its engine queues requests. The actual deployed wrapper
+instead raises a busy error when another inference is running. Therefore the
+baseline is an \emph{engine-capacity proxy}, not a measurement of accepted HTTP
+traffic, network latency or production error rate.
+
+The first candidate changes sequence capacity, cache capacity and graph capture
+policy together. Its gain must be attributed to that combined configuration.
+The 8,192-versus-16,384 comparison changes only the scheduled-token budget.
+Graph mode is \code{FULL\_AND\_PIECEWISE}; candidate capture sizes are
+\{1,2,4,8,16,24,32,48,64\}. The baseline uses
+\{1,2,128,160,256,512,1024,2048\}.
+
+\begin{table}[h]
+\centering\small
+\caption{Fixed-length synthetic workloads. Each configuration has two repetitions.}
+\begin{tabular}{@{}lrrrr@{}}
+\toprule
+Workload & Input tokens & Output tokens & Concurrency & Requests / repetition \\
+\midrule
+Single-request decode & 128 & 128 & 1 & 8 \\
+Prefill-heavy & 4,096 & 1 & 32 & 64 \\
+Decode-heavy & 128 & 128 & 32 & 64 \\
+Mixed & 1,024 & 128 & 32 & 64 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Prompts are seeded, unique token-ID sequences, shared across candidates.
+Fixed output length is enforced with \code{ignore\_eos}, \code{min\_tokens} and
+\code{max\_tokens}. Warmup uses separate prompts and the supported concurrency
+shape, followed by prefix-cache reset. All reported measured requests have zero
+cached prompt tokens. These inputs exercise tensor shapes, not representative
+language or vision semantics. Each complete configuration contributes 400 measured
+requests; the three complete configurations contribute 1,200.
+
+\subsection{Metrics and repetition handling}
+Let $T$ be wall-clock duration from the first client dispatch until all requests
+complete. For request $i$, let $s_i$, $f_i$ and $e_i$ denote submission, first
+observed output, and completion; $P_i$ and $O_i$ are token counts. We report
+\[
+R_{\rm out}=\frac{\sum_i O_i}{T},\quad
+R_{\rm in}=\frac{\sum_i P_i}{T},\quad
+\mathrm{TTFT}_i=f_i-s_i,\quad
+\mathrm{TPOT}_i=\frac{e_i-f_i}{O_i-1}.
+\]
+TPOT is undefined for one-token outputs. It is a client-observed request average,
+not an individual inter-token latency distribution. Repetition throughput pools
+token totals and wall times; p50/p95 pool per-request samples. Two repetitions
+support descriptive repeatability, not confidence intervals or significance tests.
+
+\newpage
+\section{Measured throughput}
+\begin{table}[h]
+\centering\small
+\caption{Completed runs only. Output throughput unless the row says input.}
+\begin{tabular}{@{}lrrrr@{}}
+\toprule
+Workload / metric & Baseline & 8,192 budget & 16,384 budget & 16,384 / baseline \\
+\midrule
+Single-request output tok/s & \BaseSingle & \SmallSingle & \LargeSingle & \SingleRatio{}$\times$ \\
+Prefill input tok/s & \BasePrefill & \SmallPrefill & \LargePrefill & \PrefillRatio{}$\times$ \\
+Decode-heavy output tok/s & \BaseDecode & \SmallDecode & \LargeDecode & \DecodeSpeedup{}$\times$ \\
+Mixed output tok/s & \BaseMixed & \SmallMixed & \LargeMixed & \MixedSpeedup{}$\times$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}
+\begin{groupplot}[group style={group size=2 by 1,horizontal sep=16mm},
+ width=.44\linewidth,height=58mm,
+ ybar,/pgf/bar width=11pt,enlarge x limits=.3,
+ tick label style={font=\footnotesize},label style={font=\small},
+ axis line style={gray!50},ymajorgrids,grid style={gray!15},
+ symbolic x coords={Base,8k,16k},xtick=data,ymin=0,
+ legend style={font=\footnotesize,draw=none},scaled y ticks=false,
+ /pgf/number format/1000 sep={}]
+\nextgroupplot[ylabel={Output tokens/s},title={Concurrent generation},ymax=2000,
+ legend to name=throughputlegend,legend columns=2]
+\addplot[fill=batcha,draw=none] table[x=config,y=decode,col sep=comma]{throughput.csv};
+\addplot[fill=batchb,draw=none] table[x=config,y=mixed,col sep=comma]{throughput.csv};
+\legend{Decode-heavy,Mixed}
+\nextgroupplot[ylabel={Input tokens/s},title={Prefill-heavy},ymax=22000]
+\addplot[fill=baseline,draw=none] table[x=config,y=prefill,col sep=comma]{throughput.csv};
+\end{groupplot}
+\end{tikzpicture}
+\vspace{1mm}\ref{throughputlegend}
+\caption{Matched concurrency-32 measurements. Prefill-heavy requests produce one
+output token; their rate includes scheduling and first-token generation, and is
+not isolated GPU prefill speed.}
+\end{figure}
+
+\subsection{Batching dominates the first optimization step}
+The baseline can execute only one sequence at a time. Enlarging engine capacity
+allows concurrent requests to share execution steps, raising decode-heavy output
+throughput by \DecodeSpeedup{}$\times$. Mixed throughput improves by
+\MixedSpeedup{}$\times$. The prefill-heavy gain is smaller
+(\PrefillGain{}\%), consistent with a workload that already presents substantial
+token-level parallelism. This interpretation follows the configuration contrast;
+kernel-level causal attribution would require the cancelled profiles.
+
+\subsection{The larger token budget gives a modest incremental gain}
+Moving from 8,192 to 16,384 increases prefill input throughput by
+\BudgetPrefillGain{}\% and mixed output throughput by \BudgetMixedGain{}\%,
+while decode-heavy throughput changes by \BudgetDecodeChange{}\%.
+These differences are small compared with enabling concurrency. No single
+budget is uniformly superior: the 8,192 setting has lower median mixed TTFT and
+lower observed memory use, while 16,384 has higher aggregate prefill throughput.
+
+For the two measured repetitions, the largest relative output-rate spread across
+the four cases is \SmallSpread{}\% for 8,192 and \LargeSpread{}\% for 16,384,
+calculated as $(\max-\min)/\operatorname{mean}$. We do not interpret these
+two-run ranges as uncertainty bounds on production workloads.
+
+\newpage
+\section{Latency and memory tradeoffs}
+\begin{table}[h]
+\centering\small
+\caption{Client-observed latency: p50 / p95. Values are milliseconds.}
+\begin{tabular}{@{}llrrr@{}}
+\toprule
+Workload & Metric & Baseline & 8,192 budget & 16,384 budget \\
+\midrule
+Single request & TTFT & \BaseSingleTTFT & \SmallSingleTTFT & \LargeSingleTTFT \\
+Single request & TPOT & \BaseSingleTPOT & \SmallSingleTPOT & \LargeSingleTPOT \\
+Prefill-heavy & TTFT & \BasePrefillTTFT & \SmallPrefillTTFT & \LargePrefillTTFT \\
+Decode-heavy & TTFT & \BaseDecodeTTFT & \SmallDecodeTTFT & \LargeDecodeTTFT \\
+Decode-heavy & TPOT & \BaseDecodeTPOT & \SmallDecodeTPOT & \LargeDecodeTPOT \\
+Mixed & TTFT & \BaseMixedTTFT & \SmallMixedTTFT & \LargeMixedTTFT \\
+Mixed & TPOT & \BaseMixedTPOT & \SmallMixedTPOT & \LargeMixedTPOT \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Throughput versus token latency.} Decode-heavy TPOT p50 increases from
+\BaseDecodeTPOTMedian{} to \LargeDecodeTPOTMedian{} ms. Each concurrent request
+therefore receives tokens more slowly than a request already executing alone.
+Aggregate output rate nevertheless increases sharply because many requests make
+progress together. Baseline median decode TTFT is approximately 53.4 s because
+requests queue; the 16,384 candidate reduces it to approximately 0.334 s.
+These finite closed-loop experiments include startup/drain effects and are not
+open-loop service-level capacity tests.
+
+\textbf{A low-load regression.} At concurrency one, median TTFT rises from
+\BaseSingleTTFTMedian{} to \LargeSingleTTFTMedian{} ms and output throughput
+declines by \SingleLoss{}\%. The graph capture policies differ, so this result
+does not isolate its cause. A throughput-oriented policy should not be presented
+as a universal latency improvement.
+
+\begin{table}[h]
+\centering\small
+\caption{Resource cost. GPU memory is the maximum of end-of-case snapshots,
+not a continuously sampled peak. All runs use the same 700 W power limit.}
+\begin{tabular}{@{}lrrr@{}}
+\toprule
+Resource & Baseline & 8,192 budget & 16,384 budget \\
+\midrule
+Configured cache (GiB) & 2 & 16 & 16 \\
+Observed GPU memory (GiB) & \BaseMemory & \SmallMemory & \LargeMemory \\
+Prefill end-of-case power (W), range & \BasePower & \SmallPower & \LargePower \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The larger cache and working set reduce headroom for other model workers. The
+16,384 candidate reaches \LargeMemory{} GiB in sampled GPU memory, compared with
+\BaseMemory{} GiB for the baseline. Co-resident model capacity must be re-evaluated
+before adoption. Prefill samples approach the power limit; clocks were not locked
+and varied with load. Power snapshots do not establish energy per request.
+
+\subsection{Compilation and CUDA graphs}
+Kernel compilation and CUDA graphs solve complementary problems: compilation
+optimizes generated GPU work, while graph replay reduces repeated launch
+overhead~\cite{cuda,vllmgraphs}. Both were already enabled in the baseline.
+Cached compiled artifacts reduced observed compilation initialization from
+58.45 s on an earlier startup attempt to 7.63 s in the successful baseline
+restart. This is a startup observation, not a steady-state throughput speedup
+or a controlled startup benchmark. All serving measurements exclude engine
+initialization and workload warmup. A graphs-off ablation was not performed.
+
+\newpage
+\section{Validity, quality and deployment boundary}
+\subsection{What the results establish}
+The completed configurations passed three natural-language smoke checks
+(capital of France, $7\times8$, opposite of hot), completed every measured request
+at the required output length, and reported zero cached prompt tokens. The
+complete comparison uses unchanged checkpoint bytes and package versions.
+The benchmark's CPU tests cover wall-time throughput, cumulative streaming,
+single-token TPOT, concurrency bounds, incomplete output, timeout evidence and
+process cleanup; 16 tests passed locally.
+
+These checks do not establish numerical equivalence or production model quality.
+Even the smoke outputs differ in capitalization (``cold'' versus ``Cold'').
+Synthetic token sequences are not meaningful quality examples. No image/video,
+structured-output, long-conversation or task-accuracy evaluation was completed.
+Backend arithmetic, batch shape and graph padding can affect generated tokens;
+the report does not claim identical outputs.
+
+\subsection{Threats to validity}
+\begin{itemize}
+\item \textbf{Traffic model.} Only fixed lengths and concurrency 1/32 were measured
+fully. There is no variable-length arrival distribution, sustained overload,
+admission-rate sweep or production network path.
+\item \textbf{Attribution.} The main comparison jointly changes cache size,
+sequence capacity and graph policy. It cannot isolate batching, cache or graphs
+as the sole source of speedup.
+\item \textbf{Small repetition count.} Two repetitions per case provide limited
+evidence about stability. Trials were not randomized or interleaved, and the
+successful baseline rerun occurred after the two larger-budget candidates.
+\item \textbf{Timing semantics.} TTFT includes queueing; TPOT is based on streamed
+observations. Grouped first chunks can obscure true token-generation timing.
+GPU kernel timings and a kernel-level bottleneck breakdown are unavailable.
+\item \textbf{Resources.} Memory and power are point samples. The model manager
+remained active, but no other GPU compute process was present at experiment
+startup. No concurrent co-residency test or energy measurement was performed.
+\end{itemize}
+
+\subsection{Final machine state}
+No remaining live lab processes were found. A subsequent GPU query returned
+no compute processes, while the production inference service remained active
+and untouched. The experiment folder, logs and raw results were copied to a
+local archive. No production configuration or model checkpoint was changed.
+
+\section{Recommendation}
+For the measured concurrency-32 workloads, retain the 16,384-token candidate as
+the throughput-oriented reference and 8,192 as the lower-memory, lower-median-
+mixed-TTFT alternative. Neither is a validated production default. To expose
+the measured engine capacity to users, a future integration must replace the
+single-request busy lock with asynchronous admission and bounded backpressure,
+preserve cancellation and structured/multimodal behavior, and update memory
+accounting for co-resident models.
+
+The next kernel step is profiling after warmup, followed by one backend or kernel
+ablation with a numerical reference and matched end-to-end tests~\cite{cuda}.
+Compilation and graph capture should remain part of that procedure. Current
+evidence supports a substantial engine-level throughput gain; it does not yet
+support a claim of custom-kernel acceleration or saturation of the H100.
+
+\newpage
+\appendix
+\section{Reproduction and artifact map}
+\textbf{Archive root:} this repository.\\
+\textbf{GPU workspace:} a temporary lab directory on the H100 host, removed
+after hash-verified transfer. Inference is stopped. Generating this paper and analyzing its data require no GPU.
+
+\begin{table}[h]
+\centering\small
+\caption{Source evidence for the reported configurations.}
+\begin{tabularx}{\linewidth}{@{}lX@{}}
+\toprule
+Configuration & Raw JSON under \code{results/} \\
+\midrule
+Baseline & \nolinkurl{20261001T113011.178231Z/baseline.json} \\
+8,192-token candidate & \nolinkurl{20261001T102025.566538Z/batch64_t8192.json} \\
+16,384-token candidate & \nolinkurl{20261001T102025.566538Z/batch64_t16384.json} \\
+Interrupted candidate & \nolinkurl{20261001T113011.178231Z/batch64_t2048.json} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Each result stores per-request token counts and timings, output-token hashes,
+workload definitions, package versions, hardware snapshots, model path, resolved
+engine configuration and source hashes. Initialization logs preserve selected
+backends, compile/cache messages and GPU-cache sizing. Two initial attempts
+failed because \code{ninja} was absent from the launch PATH; the installed Python
+binary directory was added without changing dependencies. The broad cancellation
+marker also tagged these earlier incomplete JSON files as cancelled; their
+nonzero exit codes and original failure logs identify them as startup failures.
+They are excluded throughout.
+
+\textbf{Build this paper locally:}
+\begin{verbatim}
+python3 paper/build_data.py
+cd paper
+tectonic paper.tex
+\end{verbatim}
+
+\textbf{Benchmark entry points, retained for a later authorized GPU run:}
+\begin{verbatim}
+python run_suite.py --configs baseline batch64_t8192 batch64_t16384
+python run_suite.py --configs batch128_t16384 \
+  --workloads workloads_scale.json
+python run_suite.py --configs batch64_t16384 \
+  --workloads workloads_profile.json --repetitions 1 --profile
+\end{verbatim}
+On the H100 host, \code{python} above means the pinned Python 3.14.6 installation.
+\code{run\_suite.py} acquires a lab lock, checks GPU idleness and serializes runs.
+Do not execute the retained queue script merely to rebuild this paper.
+
+\begin{thebibliography}{9}\small
+\bibitem{pagedattention} W. Kwon et al.
+\emph{Efficient Memory Management for Large Language Model Serving with
+PagedAttention}. SOSP, 2023. \url{https://arxiv.org/abs/2309.06180}.
+\bibitem{qwen} Qwen Team. \emph{Qwen3.8-27B model card}, 2026.
+\url{https://huggingface.co/Qwen/Qwen3.8-27B}.
+\bibitem{vllmopt} vLLM Project. \emph{Optimization and Tuning}.
+\url{https://docs.vllm.ai/en/latest/configuration/optimization/}.
+\bibitem{vllmgraphs} vLLM Project. \emph{CUDA Graphs} and
+\emph{torch.compile integration}.
+\url{https://docs.vllm.ai/en/latest/design/cuda_graphs/};
+\url{https://docs.vllm.ai/en/latest/design/torch_compile/}.
+\bibitem{cuda} NVIDIA. \emph{CUDA C++ Best Practices Guide}.
+\url{https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/}.
+\end{thebibliography}
+\small Online references consulted on 1 October 2026. Installed runtime logs,
+rather than newer online defaults, define the configurations measured here.
+\end{document}

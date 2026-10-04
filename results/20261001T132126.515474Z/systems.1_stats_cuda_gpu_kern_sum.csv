@@ -1,0 +1,7 @@
+Time (%),Total Time (ns),Instances,Avg (ns),Med (ns),Min (ns),Max (ns),StdDev (ns),Name
+33.7,66292407,80,828655.1,828679.5,4512,1653647,829280.0,"void vllm::silu_and_mul_per_block_quant_kernel<c10::BFloat16, c10::Float8_e4m3fn, (bool)1, (int)128>(T2 *, float *, const T1 *, const float *, int)"
+22.7,44741495,360,124281.9,77999.0,3456,305373,121646.6,"void <unnamed>::gdn_pipeline_kernel<long, __nv_bfloat16, (bool)1, (bool)0>(const __nv_bfloat16 *, const __nv_bfloat16 *, const __nv_bfloat16 *, const float *, const T2 *, float *, __nv_bfloat16 *, const T1 *, long, long, long, long, long, long, float, int, int)"
+15.0,29496973,240,122904.1,74815.0,5888,295197,118932.1,"void <unnamed>::gdn_pipeline_kernel<long, __nv_bfloat16, (bool)1, (bool)1>(const __nv_bfloat16 *, const __nv_bfloat16 *, const __nv_bfloat16 *, const float *, const T2 *, float *, __nv_bfloat16 *, const T1 *, long, long, long, long, long, long, float, int, int)"
+14.5,28614584,80,357682.3,357420.5,2688,716888,357182.2,"<unnamed>::silu_mul_fp8_warp_kernel(const __nv_bfloat16 *, unsigned char *, float *, const float *, long long, long long, long long, long long)"
+7.1,13989842,120,116582.0,72575.0,5120,273374,113858.0,fused_recurrent_gated_delta_rule_packed_decode_kernel
+7.0,13860402,120,115503.4,71119.5,3263,273502,114610.2,"void <unnamed>::gdn_decode_warp_kernel<long, __nv_bfloat16, (bool)1, (int)4>(const __nv_bfloat16 *, const __nv_bfloat16 *, const __nv_bfloat16 *, const float *, const T2 *, float *, __nv_bfloat16 *, const T1 *, long, long, long, long, long, long, float)"

@@ -1,0 +1,279 @@
+{
+  "status": "complete",
+  "action": "validate",
+  "started_at": "2026-10-01T12:38:48.577323+00:00",
+  "gpu": "name, uuid, driver_version, memory.total [MiB], memory.used [MiB], utilization.gpu [%], power.draw [W], power.limit [W], clocks.current.sm [MHz], clocks.current.memory [MHz], temperature.gpu\nNVIDIA H100 80GB HBM3, GPU-redacted, 610.57.04, 81559 MiB, 0 MiB, 0 %, 70.41 W, 700.00 W, 345 MHz, 2619 MHz, 32",
+  "source_sha256": {
+    "kernel.py": "363364251ddac966ad9a9c6173e0d901d044ad61d7335d4371b6f3fce6c27a31",
+    "gdn_decode.cu": "41d4a2c99ba0f85a19e3dbd7120b302840f4286ce2563c42466d58655232c5e3",
+    "experiment.py": "4af55f69f713c4b55f778d55e35fe2509432a6d121cd8eaa67fa776dd606cd56",
+    "worker.py": "7523548e20d4506fbb2d41be6afd538d6634f5fc15412d626dd986a8319c3da3"
+  },
+  "results": {
+    "cases": [
+      {
+        "seed": 0,
+        "batch": 0,
+        "padded": false,
+        "max_state_abs": 0.0,
+        "max_output_abs": 0
+      },
+      {
+        "seed": 0,
+        "batch": 0,
+        "padded": true,
+        "max_state_abs": 0.0,
+        "max_output_abs": 0
+      },
+      {
+        "seed": 0,
+        "batch": 1,
+        "padded": false,
+        "max_state_abs": 1.1920928955078125e-07,
+        "max_output_abs": 0.0
+      },
+      {
+        "seed": 0,
+        "batch": 1,
+        "padded": true,
+        "max_state_abs": 1.1920928955078125e-07,
+        "max_output_abs": 0.0
+      },
+      {
+        "seed": 0,
+        "batch": 2,
+        "padded": false,
+        "max_state_abs": 1.7881393432617188e-07,
+        "max_output_abs": 4.76837158203125e-07
+      },
+      {
+        "seed": 0,
+        "batch": 2,
+        "padded": true,
+        "max_state_abs": 1.7881393432617188e-07,
+        "max_output_abs": 1.9073486328125e-06
+      },
+      {
+        "seed": 0,
+        "batch": 7,
+        "padded": false,
+        "max_state_abs": 1.7881393432617188e-07,
+        "max_output_abs": 1.9073486328125e-06
+      },
+      {
+        "seed": 0,
+        "batch": 7,
+        "padded": true,
+        "max_state_abs": 1.7881393432617188e-07,
+        "max_output_abs": 3.0517578125e-05
+      },
+      {
+        "seed": 0,
+        "batch": 32,
+        "padded": false,
+        "max_state_abs": 2.086162567138672e-07,
+        "max_output_abs": 0.000244140625
+      },
+      {
+        "seed": 0,
+        "batch": 32,
+        "padded": true,
+        "max_state_abs": 1.7881393432617188e-07,
+        "max_output_abs": 6.103515625e-05
+      },
+      {
+        "seed": 0,
+        "batch": 64,
+        "padded": false,
+        "max_state_abs": 1.7881393432617188e-07,
+        "max_output_abs": 0.0001220703125
+      },
+      {
+        "seed": 0,
+        "batch": 64,
+        "padded": true,
+        "max_state_abs": 1.7881393432617188e-07,
+        "max_output_abs": 0.0001220703125
+      },
+      {
+        "seed": 19,
+        "batch": 0,
+        "padded": false,
+        "max_state_abs": 0.0,
+        "max_output_abs": 0
+      },
+      {
+        "seed": 19,
+        "batch": 0,
+        "padded": true,
+        "max_state_abs": 0.0,
+        "max_output_abs": 0
+      },
+      {
+        "seed": 19,
+        "batch": 1,
+        "padded": false,
+        "max_state_abs": 1.1920928955078125e-07,
+        "max_output_abs": 4.76837158203125e-07
+      },
+      {
+        "seed": 19,
+        "batch": 1,
+        "padded": true,
+        "max_state_abs": 1.1920928955078125e-07,
+        "max_output_abs": 4.76837158203125e-07
+      },
+      {
+        "seed": 19,
+        "batch": 2,
+        "padded": false,
+        "max_state_abs": 1.1920928955078125e-07,
+        "max_output_abs": 4.76837158203125e-07
+      },
+      {
+        "seed": 19,
+        "batch": 2,
+        "padded": true,
+        "max_state_abs": 1.1920928955078125e-07,
+        "max_output_abs": 4.76837158203125e-07
+      },
+      {
+        "seed": 19,
+        "batch": 7,
+        "padded": false,
+        "max_state_abs": 1.1920928955078125e-07,
+        "max_output_abs": 7.62939453125e-06
+      },
+      {
+        "seed": 19,
+        "batch": 7,
+        "padded": true,
+        "max_state_abs": 1.1920928955078125e-07,
+        "max_output_abs": 0.0
+      },
+      {
+        "seed": 19,
+        "batch": 32,
+        "padded": false,
+        "max_state_abs": 1.1920928955078125e-07,
+        "max_output_abs": 6.103515625e-05
+      },
+      {
+        "seed": 19,
+        "batch": 32,
+        "padded": true,
+        "max_state_abs": 1.1920928955078125e-07,
+        "max_output_abs": 3.814697265625e-06
+      },
+      {
+        "seed": 19,
+        "batch": 64,
+        "padded": false,
+        "max_state_abs": 1.7881393432617188e-07,
+        "max_output_abs": 6.103515625e-05
+      },
+      {
+        "seed": 19,
+        "batch": 64,
+        "padded": true,
+        "max_state_abs": 1.1920928955078125e-07,
+        "max_output_abs": 7.62939453125e-06
+      },
+      {
+        "seed": 2026,
+        "batch": 0,
+        "padded": false,
+        "max_state_abs": 0.0,
+        "max_output_abs": 0
+      },
+      {
+        "seed": 2026,
+        "batch": 0,
+        "padded": true,
+        "max_state_abs": 0.0,
+        "max_output_abs": 0
+      },
+      {
+        "seed": 2026,
+        "batch": 1,
+        "padded": false,
+        "max_state_abs": 1.1920928955078125e-07,
+        "max_output_abs": 0.0
+      },
+      {
+        "seed": 2026,
+        "batch": 1,
+        "padded": true,
+        "max_state_abs": 1.1920928955078125e-07,
+        "max_output_abs": 0.0
+      },
+      {
+        "seed": 2026,
+        "batch": 2,
+        "padded": false,
+        "max_state_abs": 1.1920928955078125e-07,
+        "max_output_abs": 1.52587890625e-05
+      },
+      {
+        "seed": 2026,
+        "batch": 2,
+        "padded": true,
+        "max_state_abs": 1.1920928955078125e-07,
+        "max_output_abs": 3.0517578125e-05
+      },
+      {
+        "seed": 2026,
+        "batch": 7,
+        "padded": false,
+        "max_state_abs": 1.7881393432617188e-07,
+        "max_output_abs": 3.814697265625e-06
+      },
+      {
+        "seed": 2026,
+        "batch": 7,
+        "padded": true,
+        "max_state_abs": 1.7881393432617188e-07,
+        "max_output_abs": 1.9073486328125e-06
+      },
+      {
+        "seed": 2026,
+        "batch": 32,
+        "padded": false,
+        "max_state_abs": 1.7881393432617188e-07,
+        "max_output_abs": 6.103515625e-05
+      },
+      {
+        "seed": 2026,
+        "batch": 32,
+        "padded": true,
+        "max_state_abs": 1.7881393432617188e-07,
+        "max_output_abs": 3.0517578125e-05
+      },
+      {
+        "seed": 2026,
+        "batch": 64,
+        "padded": false,
+        "max_state_abs": 1.7881393432617188e-07,
+        "max_output_abs": 3.0517578125e-05
+      },
+      {
+        "seed": 2026,
+        "batch": 64,
+        "padded": true,
+        "max_state_abs": 1.7881393432617188e-07,
+        "max_output_abs": 6.103515625e-05
+      }
+    ],
+    "trajectory_steps": 256,
+    "passed": true,
+    "state_tolerance": {
+      "rtol": 0.0003,
+      "atol": 3e-05
+    },
+    "output_tolerance": {
+      "rtol": 0.016,
+      "atol": 0.002
+    }
+  },
+  "finished_at": "2026-10-01T12:39:17.533501+00:00"
+}

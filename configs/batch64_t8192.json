@@ -1,0 +1,25 @@
+{
+  "name": "batch64_t8192",
+  "description": "64 sequences, 16 GiB cache, 8192 scheduled tokens; otherwise identical to batch64_t2048.",
+  "engine": {
+    "max_num_seqs": 64,
+    "max_num_batched_tokens": 8192,
+    "kv_cache_memory_bytes": 17179869184,
+    "compilation_config": {
+      "cudagraph_mode": "FULL_AND_PIECEWISE",
+      "cudagraph_capture_sizes": [
+        1,
+        2,
+        4,
+        8,
+        16,
+        24,
+        32,
+        48,
+        64
+      ],
+      "max_cudagraph_capture_size": 64,
+      "cudagraph_mm_encoder": false
+    }
+  }
+}

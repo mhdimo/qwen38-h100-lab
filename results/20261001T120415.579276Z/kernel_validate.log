@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 203, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "qwen38-h100-lab/custom_kernels/experiment.py", line 150, in <module>
+    if __name__=='__main__': main()
+                             ~~~~^^
+  File "qwen38-h100-lab/custom_kernels/experiment.py", line 131, in main
+    assert (HERE/'silu_mul_fp8.cu').is_file(), 'Custom CUDA kernel has not been implemented yet'
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+AssertionError: Custom CUDA kernel has not been implemented yet

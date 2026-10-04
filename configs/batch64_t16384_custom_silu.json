@@ -1,0 +1,17 @@
+{
+  "name": "batch64_t16384_custom_silu",
+  "description": "Same tuned engine with an opt-in custom CUDA SiLU/FP8 quantization kernel.",
+  "engine": {
+    "max_num_seqs": 64,
+    "max_num_batched_tokens": 16384,
+    "kv_cache_memory_bytes": 17179869184,
+    "worker_cls": "custom_kernels.worker.KernelWorker",
+    "compilation_config": {
+      "cache_dir": "custom_kernels/build/vllm_compile",
+      "cudagraph_mode": "FULL_AND_PIECEWISE",
+      "cudagraph_capture_sizes": [1, 2, 4, 8, 16, 24, 32, 48, 64],
+      "max_cudagraph_capture_size": 64,
+      "cudagraph_mm_encoder": false
+    }
+  }
+}

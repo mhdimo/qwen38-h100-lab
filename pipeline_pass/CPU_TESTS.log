@@ -1,0 +1,28 @@
+test_child_ignoring_term_is_stopped_even_when_parent_exits (test_cleanup.CleanupTests.test_child_ignoring_term_is_stopped_even_when_parent_exits) ... ok
+test_corrupt_bytes_rejected_even_with_python_optimization (test_gdn_transfer.TransferIntegrityTests.test_corrupt_bytes_rejected_even_with_python_optimization) ... ok
+test_valid_bytes_are_verified_with_python_optimization (test_gdn_transfer.TransferIntegrityTests.test_valid_bytes_are_verified_with_python_optimization) ... ok
+test_selection_requires_a_graph_launch_and_recurrent_kernel (test_kernel_profiles.DecodeProfileTests.test_selection_requires_a_graph_launch_and_recurrent_kernel) ... ok
+test_empty_or_zero_duration_cannot_look_successful (test_measurement.MetricsTests.test_empty_or_zero_duration_cannot_look_successful) ... ok
+test_single_output_token_has_no_decode_latency (test_measurement.MetricsTests.test_single_output_token_has_no_decode_latency) ... ok
+test_throughput_uses_wall_time_not_summed_request_latencies (test_measurement.MetricsTests.test_throughput_uses_wall_time_not_summed_request_latencies) ... ok
+test_cumulative_chunks_and_duplicate_final_do_not_double_count (test_measurement.StreamTests.test_cumulative_chunks_and_duplicate_final_do_not_double_count) ... ok
+test_failure_retains_completed_and_error_outcomes (test_measurement.StreamTests.test_failure_retains_completed_and_error_outcomes) ... ok
+test_load_generator_honors_concurrency (test_measurement.StreamTests.test_load_generator_honors_concurrency) ... ok
+test_nonpositive_load_rejected (test_measurement.StreamTests.test_nonpositive_load_rejected) ... ok
+test_shortened_or_unfinished_stream_is_failure (test_measurement.StreamTests.test_shortened_or_unfinished_stream_is_failure) ... ok
+test_timeout_is_failure (test_measurement.StreamTests.test_timeout_is_failure) ... ok
+test_timeout_preserves_cancelled_count (test_measurement.StreamTests.test_timeout_preserves_cancelled_count) ... ok
+test_overlapping_streams_do_not_inflate_gpu_busy_time (test_pipeline_analysis.TimelineTests.test_overlapping_streams_do_not_inflate_gpu_busy_time) ... ok
+test_failed_parent_exit_still_reaps_surviving_child (test_pipeline_children.DiagnosticChildrenTests.test_failed_parent_exit_still_reaps_surviving_child) ... ok
+test_timeout_kills_descendant_even_when_it_ignores_term (test_pipeline_children.DiagnosticChildrenTests.test_timeout_kills_descendant_even_when_it_ignores_term) ... ok
+test_missing_requests_or_cache_hits_rejected (test_report.ReportTests.test_missing_requests_or_cache_hits_rejected) ... ok
+test_pooling_repetitions_weights_total_tokens_by_total_time (test_report.ReportTests.test_pooling_repetitions_weights_total_tokens_by_total_time) ... ok
+test_profile_failed_or_partial_results_excluded (test_report.ReportTests.test_profile_failed_or_partial_results_excluded) ... ok
+test_profile_and_kernel_mode_are_rejected_before_gpu_access (test_suite_cli.SuiteCliTests.test_profile_and_kernel_mode_are_rejected_before_gpu_access) ... ok
+test_counts_only_gpu_kernel_duration_not_cpu_or_copies (test_trace_summary.TraceTests.test_counts_only_gpu_kernel_duration_not_cpu_or_copies) ... ok
+test_missing_gpu_events_is_not_a_successful_profile (test_trace_summary.TraceTests.test_missing_gpu_events_is_not_a_successful_profile) ... ok
+
+----------------------------------------------------------------------
+Ran 23 tests in 1.410s
+
+OK

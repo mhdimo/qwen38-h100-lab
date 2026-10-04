@@ -1,0 +1,15 @@
+[
+  {
+    "config": "kernel_gdn-validate",
+    "exit_code": 0,
+    "command": [
+      "<python-env>/bin/python",
+      "-m",
+      "gdn_pass.experiment",
+      "--action",
+      "validate",
+      "--output",
+      "qwen38-h100-lab/results/20261001T124343.661727Z/kernel_gdn-validate.json"
+    ]
+  }
+]

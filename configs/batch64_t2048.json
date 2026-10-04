@@ -1,0 +1,15 @@
+{
+  "name": "batch64_t2048",
+  "description": "64 sequences, 16 GiB cache, 2048 scheduled tokens, decode graph sizes for concurrency.",
+  "engine": {
+    "max_num_seqs": 64,
+    "max_num_batched_tokens": 2048,
+    "kv_cache_memory_bytes": 17179869184,
+    "compilation_config": {
+      "cudagraph_mode": "FULL_AND_PIECEWISE",
+      "cudagraph_capture_sizes": [1, 2, 4, 8, 16, 24, 32, 48, 64],
+      "max_cudagraph_capture_size": 64,
+      "cudagraph_mm_encoder": false
+    }
+  }
+}

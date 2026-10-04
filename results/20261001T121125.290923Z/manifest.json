@@ -1,0 +1,19 @@
+[
+  {
+    "config": "batch64_t16384_custom_silu",
+    "exit_code": 0,
+    "command": [
+      "<python-env>/bin/python",
+      "qwen38-h100-lab/benchmark.py",
+      "--config",
+      "qwen38-h100-lab/configs/batch64_t16384_custom_silu.json",
+      "--workloads",
+      "workloads_profile.json",
+      "--output",
+      "qwen38-h100-lab/results/20261001T121125.290923Z/batch64_t16384_custom_silu.json",
+      "--repetitions",
+      "1",
+      "--profile"
+    ]
+  }
+]

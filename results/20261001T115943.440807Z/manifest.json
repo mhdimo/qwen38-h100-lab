@@ -1,0 +1,19 @@
+[
+  {
+    "config": "batch64_t16384",
+    "exit_code": 0,
+    "command": [
+      "<python-env>/bin/python",
+      "qwen38-h100-lab/benchmark.py",
+      "--config",
+      "qwen38-h100-lab/configs/batch64_t16384.json",
+      "--workloads",
+      "workloads_profile.json",
+      "--output",
+      "qwen38-h100-lab/results/20261001T115943.440807Z/batch64_t16384.json",
+      "--repetitions",
+      "1",
+      "--profile"
+    ]
+  }
+]

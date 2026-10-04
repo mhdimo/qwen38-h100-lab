@@ -1,0 +1,16 @@
+[
+  {
+    "name": "prefill_profile",
+    "input_tokens": 4096,
+    "output_tokens": 1,
+    "concurrency": 32,
+    "requests": 32
+  },
+  {
+    "name": "decode_profile",
+    "input_tokens": 128,
+    "output_tokens": 32,
+    "concurrency": 32,
+    "requests": 32
+  }
+]

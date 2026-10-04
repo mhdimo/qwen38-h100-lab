@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 203, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "qwen38-h100-lab/gdn_pass/experiment.py", line 161, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "qwen38-h100-lab/gdn_pass/experiment.py", line 148, in main
+    assert (HERE/'gdn_decode.cu').is_file(),'Custom GDN kernel not implemented'
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+AssertionError: Custom GDN kernel not implemented

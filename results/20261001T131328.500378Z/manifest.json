@@ -1,0 +1,15 @@
+[
+  {
+    "config": "kernel_pipeline-validate",
+    "exit_code": 1,
+    "command": [
+      "<python-env>/bin/python",
+      "-m",
+      "pipeline_pass.experiment",
+      "--action",
+      "validate",
+      "--output",
+      "qwen38-h100-lab/results/20261001T131328.500378Z/kernel_pipeline-validate.json"
+    ]
+  }
+]

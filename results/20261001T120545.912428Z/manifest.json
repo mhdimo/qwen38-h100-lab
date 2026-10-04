@@ -1,0 +1,15 @@
+[
+  {
+    "config": "kernel_validate",
+    "exit_code": 1,
+    "command": [
+      "<python-env>/bin/python",
+      "-m",
+      "custom_kernels.experiment",
+      "--action",
+      "validate",
+      "--output",
+      "qwen38-h100-lab/results/20261001T120545.912428Z/kernel_validate.json"
+    ]
+  }
+]

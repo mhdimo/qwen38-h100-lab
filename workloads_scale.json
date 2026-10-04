@@ -1,0 +1,30 @@
+[
+  {
+    "name": "decode_c64",
+    "input_tokens": 128,
+    "output_tokens": 128,
+    "concurrency": 64,
+    "requests": 128
+  },
+  {
+    "name": "mixed_c64",
+    "input_tokens": 1024,
+    "output_tokens": 128,
+    "concurrency": 64,
+    "requests": 128
+  },
+  {
+    "name": "decode_c128",
+    "input_tokens": 128,
+    "output_tokens": 128,
+    "concurrency": 128,
+    "requests": 256
+  },
+  {
+    "name": "mixed_c128",
+    "input_tokens": 1024,
+    "output_tokens": 128,
+    "concurrency": 128,
+    "requests": 256
+  }
+]

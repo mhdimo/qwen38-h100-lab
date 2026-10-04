@@ -1,0 +1,15 @@
+{
+  "name": "baseline",
+  "description": "Deployed engine limits; async client queues concurrent requests. Does not reproduce the production API rejection lock.",
+  "engine": {
+    "max_num_seqs": 1,
+    "max_num_batched_tokens": 2048,
+    "kv_cache_memory_bytes": 2147483648,
+    "compilation_config": {
+      "cudagraph_mode": "FULL_AND_PIECEWISE",
+      "cudagraph_capture_sizes": [1, 2, 128, 160, 256, 512, 1024, 2048],
+      "max_cudagraph_capture_size": 2048,
+      "cudagraph_mm_encoder": false
+    }
+  }
+}

@@ -1,0 +1,24 @@
+\newcommand{\MicroBase}{1581.29}
+\newcommand{\MicroCustom}{698.91}
+\newcommand{\MicroSpeedup}{2.26}
+\newcommand{\PrefillKernelGain}{+5.90}
+\newcommand{\DecodeKernelGain}{+0.93}
+\newcommand{\NumericalCases}{216}
+\newcommand{\CustomProfileCalls}{1408}
+\newcommand{\MicroRows}{1 & 2.00 & 2.09 & 0.96$\times$ \\
+32 & 4.85 & 3.17 & 1.53$\times$ \\
+64 & 7.57 & 4.60 & 1.65$\times$ \\
+256 & 27.07 & 13.70 & 1.98$\times$ \\
+1,024 & 100.61 & 46.25 & 2.18$\times$ \\
+4,096 & 394.71 & 175.77 & 2.25$\times$ \\
+8,192 & 791.88 & 350.89 & 2.26$\times$ \\
+16,384 & 1581.29 & 698.91 & 2.26$\times$ \\}
+\newcommand{\EngineRows}{Single / output tok/s & 72.56 & 72.45 & -0.15\% \\
+Prefill / input tok/s & 18127.41 & 19196.34 & +5.90\% \\
+Decode / output tok/s & 1645.49 & 1660.77 & +0.93\% \\
+Mixed / output tok/s & 992.28 & 1028.54 & +3.65\% \\}
+\newcommand{\LatencyRows}{Single & 96.99 & 101.12 & 13.14 & 13.14 \\
+Prefill & 8165.14 & 7513.16 & --- & --- \\
+Decode & 334.95 & 327.06 & 17.00 & 16.89 \\
+Mixed & 1899.64 & 1786.43 & 18.26 & 18.18 \\}
+\newcommand{\TokenComparison}{259 of 400 matched measured requests have identical generated-token hashes. Two unchanged reference runs agree on 264/400 requests. Thus the full engine is not bitwise deterministic in these runs. This control does not prove all differences are harmless or caused by scheduling; representative quality evaluation remains necessary. Both configurations pass the same three text smoke checks with identical answers.}

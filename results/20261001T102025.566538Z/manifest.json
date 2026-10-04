@@ -1,0 +1,66 @@
+[
+  {
+    "config": "baseline",
+    "exit_code": 1,
+    "command": [
+      "<python-env>/bin/python",
+      "qwen38-h100-lab/benchmark.py",
+      "--config",
+      "qwen38-h100-lab/configs/baseline.json",
+      "--workloads",
+      "qwen38-h100-lab/workloads.json",
+      "--output",
+      "qwen38-h100-lab/results/20261001T102025.566538Z/baseline.json",
+      "--repetitions",
+      "2"
+    ]
+  },
+  {
+    "config": "batch64_t2048",
+    "exit_code": 1,
+    "command": [
+      "<python-env>/bin/python",
+      "qwen38-h100-lab/benchmark.py",
+      "--config",
+      "qwen38-h100-lab/configs/batch64_t2048.json",
+      "--workloads",
+      "qwen38-h100-lab/workloads.json",
+      "--output",
+      "qwen38-h100-lab/results/20261001T102025.566538Z/batch64_t2048.json",
+      "--repetitions",
+      "2"
+    ]
+  },
+  {
+    "config": "batch64_t8192",
+    "exit_code": 0,
+    "command": [
+      "<python-env>/bin/python",
+      "qwen38-h100-lab/benchmark.py",
+      "--config",
+      "qwen38-h100-lab/configs/batch64_t8192.json",
+      "--workloads",
+      "qwen38-h100-lab/workloads.json",
+      "--output",
+      "qwen38-h100-lab/results/20261001T102025.566538Z/batch64_t8192.json",
+      "--repetitions",
+      "2"
+    ]
+  },
+  {
+    "config": "batch64_t16384",
+    "exit_code": 0,
+    "command": [
+      "<python-env>/bin/python",
+      "qwen38-h100-lab/benchmark.py",
+      "--config",
+      "qwen38-h100-lab/configs/batch64_t16384.json",
+      "--workloads",
+      "qwen38-h100-lab/workloads.json",
+      "--output",
+      "qwen38-h100-lab/results/20261001T102025.566538Z/batch64_t16384.json",
+      "--repetitions",
+      "2"
+    ]
+  }
+]

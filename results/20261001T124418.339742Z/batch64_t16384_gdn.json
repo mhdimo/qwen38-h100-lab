@@ -1,0 +1,917 @@
+{
+  "started_at": "2026-10-01T12:44:23.842623+00:00",
+  "config": {
+    "name": "batch64_t16384_gdn",
+    "description": "GDN decode-only CUDA ablation; same tuned engine settings.",
+    "engine": {
+      "max_num_seqs": 64,
+      "max_num_batched_tokens": 16384,
+      "kv_cache_memory_bytes": 17179869184,
+      "compilation_config": {
+        "cudagraph_mode": "FULL_AND_PIECEWISE",
+        "cudagraph_capture_sizes": [
+          1,
+          2,
+          4,
+          8,
+          16,
+          24,
+          32,
+          48,
+          64
+        ],
+        "max_cudagraph_capture_size": 64,
+        "cudagraph_mm_encoder": false,
+        "cache_dir": "qwen38-h100-lab/gdn_pass/build/gdn_compile"
+      },
+      "worker_cls": "gdn_pass.worker.GDNWorker"
+    }
+  },
+  "engine_options": {
+    "model": "~/.cache/huggingface/hub/models--Qwen--Qwen3.8-27B-FP8/snapshots/017b9c7af6b5689d5dd426a76e0bc077eb5ca20a",
+    "tensor_parallel_size": 1,
+    "max_model_len": 10240,
+    "gpu_memory_utilization": 0.85,
+    "enforce_eager": false,
+    "enable_prefix_caching": true,
+    "enable_chunked_prefill": true,
+    "disable_log_stats": false,
+    "seed": 0,
+    "mm_processor_cache_gb": 1,
+    "mm_processor_kwargs": {
+      "min_pixels": 1024,
+      "max_pixels": 2621440
+    },
+    "limit_mm_per_prompt": {
+      "video": 1,
+      "image": 1
+    },
+    "max_num_seqs": 64,
+    "max_num_batched_tokens": 16384,
+    "kv_cache_memory_bytes": 17179869184,
+    "compilation_config": {
+      "cudagraph_mode": "FULL_AND_PIECEWISE",
+      "cudagraph_capture_sizes": [
+        1,
+        2,
+        4,
+        8,
+        16,
+        24,
+        32,
+        48,
+        64
+      ],
+      "max_cudagraph_capture_size": 64,
+      "cudagraph_mm_encoder": false,
+      "cache_dir": "qwen38-h100-lab/gdn_pass/build/gdn_compile"
+    },
+    "worker_cls": "gdn_pass.worker.GDNWorker",
+    "profiler_config": {
+      "profiler": "torch",
+      "torch_profiler_dir": "qwen38-h100-lab/results/20261001T124418.339742Z/traces",
+      "torch_profiler_with_stack": false,
+      "torch_profiler_record_shapes": false,
+      "ignore_frontend": true,
+      "max_iterations": 12
+    }
+  },
+  "gpu_before": "name, uuid, driver_version, memory.total [MiB], memory.used [MiB], utilization.gpu [%], power.draw [W], power.limit [W], clocks.current.sm [MHz], clocks.current.memory [MHz], temperature.gpu\nNVIDIA H100 80GB HBM3, GPU-redacted, 610.57.04, 81559 MiB, 0 MiB, 0 %, 70.80 W, 700.00 W, 345 MHz, 2619 MHz, 33",
+  "versions": {
+    "vllm": "0.26.0",
+    "torch": "2.11.0",
+    "triton": "3.6.0",
+    "transformers": "5.16.1",
+    "flashinfer-python": "0.6.14"
+  },
+  "method": "AsyncLLM direct, closed-loop concurrency, cumulative output, fixed length, seeded unique cold prompts. TTFT includes scheduler queue. TPOT=(completion-first token)/(output count-1).",
+  "profiled": true,
+  "python_executable": "<python-env>/bin/python",
+  "source_sha256": {
+    "benchmark.py": "2229d5e20345a4199e79be42ec53a5c2620ab125ca2f0fe20cff9c2baa887f8b",
+    "measurement.py": "6ff4e59dc01af943487dbe5044ee209a59a0a83ab30bfe5458481f1fde7c5430",
+    "batch64_t16384_gdn.json": "81ecff8659e3928b59eb5f7131c6e99b5c0369cff329956c9132e2b2aa95c2a5",
+    "workloads_profile.json": "7964623889b87d299b406b556caf20a245695ad5b06d8a43d8648170bfe22b91"
+  },
+  "status": "complete",
+  "results": [
+    {
+      "workload": {
+        "name": "prefill_profile",
+        "input_tokens": 4096,
+        "output_tokens": 1,
+        "concurrency": 32,
+        "requests": 32
+      },
+      "repetition": 0,
+      "summary": {
+        "completed": 32,
+        "elapsed_s": 7.330340058077127,
+        "output_tokens_per_s": 4.365418213407435,
+        "input_tokens_per_s": 17880.753002116853,
+        "requests_per_s": 4.365418213407435,
+        "cached_tokens": 0,
+        "ttft_ms": {
+          "mean": 5103.8749071303755,
+          "p50": 5319.638587534428,
+          "p95": 7322.053168748971,
+          "count": 32
+        },
+        "latency_ms": {
+          "mean": 5103.8749071303755,
+          "p50": 5319.638587534428,
+          "p95": 7322.053168748971,
+          "count": 32
+        },
+        "tpot_ms": {
+          "mean": null,
+          "p50": null,
+          "p95": null,
+          "count": 0
+        }
+      },
+      "requests": [
+        {
+          "sample": {
+            "input_tokens": 4096,
+            "output_tokens": 1,
+            "ttft_s": 1.675348290009424,
+            "latency_s": 1.675348290009424,
+            "cached_tokens": 0
+          },
+          "token_sha256": "d539b025f09be474d7229f89e1d39afc0a1f2f46526017e064299fdf2bb68c9a",
+          "request_index": 0
+        },
+        {
+          "sample": {
+            "input_tokens": 4096,
+            "output_tokens": 1,
+            "ttft_s": 1.6749718319624662,
+            "latency_s": 1.6749718319624662,
+            "cached_tokens": 0
+          },
+          "token_sha256": "03859c8f695ed122ca029bbcd1f6a1079c670d51e4e920d94edb5583890199e9",
+          "request_index": 1
+        },
+        {
+          "sample": {
+            "input_tokens": 4096,
+            "output_tokens": 1,
+            "ttft_s": 2.5878182859160006,
+            "latency_s": 2.5878182859160006,
+            "cached_tokens": 0
+          },
+          "token_sha256": "0dcf125c707020d9131f80175a35a893a59b85c34652446364022ba593b5b93f",
+          "request_index": 2
+        },
+        {
+          "sample": {
+            "input_tokens": 4096,
+            "output_tokens": 1,
+            "ttft_s": 2.5876566590741277,
+            "latency_s": 2.5876566590741277,
+            "cached_tokens": 0
+          },
+          "token_sha256": "f35cc8f57f5dcd55f814cf7a0469cf44a00104bf76466c95fe07fc59e9c8bae3",
+          "request_index": 3
+        },
+        {
+          "sample": {
+            "input_tokens": 4096,
+            "output_tokens": 1,
+            "ttft_s": 2.5874426069203764,
+            "latency_s": 2.5874426069203764,
+            "cached_tokens": 0
+          },
+          "token_sha256": "1af1f404aa517c972064dda6843ac6438ff7b64bdb925a99a423f9384f67ea98",
+          "request_index": 4
+        },
+        {
+          "sample": {
+            "input_tokens": 4096,
+            "output_tokens": 1,
+            "ttft_s": 2.5872168061323464,
+            "latency_s": 2.5872168061323464,
+            "cached_tokens": 0
+          },
+          "token_sha256": "a8f2ecf6c811b67c050190173c8b89ce2c99b7993d29235ff3bf656b6a2c505e",
+          "request_index": 5
+        },
+        {
+          "sample": {
+            "input_tokens": 4096,
+            "output_tokens": 1,
+            "ttft_s": 3.498015845194459,
+            "latency_s": 3.498015845194459,
+            "cached_tokens": 0
+          },
+          "token_sha256": "299bd8f76fc7cfcf0140c68e8043976a99efe549a1b40e07832f5dac83a34407",
+          "request_index": 6
+        },
+        {
+          "sample": {
+            "input_tokens": 4096,
+            "output_tokens": 1,
+            "ttft_s": 3.497743810992688,
+            "latency_s": 3.497743810992688,
+            "cached_tokens": 0
+          },
+          "token_sha256": "03859c8f695ed122ca029bbcd1f6a1079c670d51e4e920d94edb5583890199e9",
+          "request_index": 7
+        },
+        {
+          "sample": {
+            "input_tokens": 4096,
+            "output_tokens": 1,
+            "ttft_s": 3.4974734159186482,
+            "latency_s": 3.4974734159186482,
+            "cached_tokens": 0
+          },
+          "token_sha256": "3384246e9de7f012e91f718e85b00e46b4e5a2e39dbe6099cf396e9c140d9d36",
+          "request_index": 8
+        },
+        {
+          "sample": {
+            "input_tokens": 4096,
+            "output_tokens": 1,
+            "ttft_s": 3.496923094149679,
+            "latency_s": 3.496923094149679,
+            "cached_tokens": 0
+          },
+          "token_sha256": "8fc9a0314c3333740b36e30fd1d969f107377d7c987f645b58d2975aef7938b4",
+          "request_index": 9
+        },
+        {
+          "sample": {
+            "input_tokens": 4096,
+            "output_tokens": 1,
+            "ttft_s": 4.410474115051329,
+            "latency_s": 4.410474115051329,
+            "cached_tokens": 0
+          },
+          "token_sha256": "4b1c0cf6d0c649c6a391a8a091e196d3ad94824f99ae2497ed0648f8e1911193",
+          "request_index": 10
+        },
+        {
+          "sample": {
+            "input_tokens": 4096,
+            "output_tokens": 1,
+            "ttft_s": 4.410280362935737,
+            "latency_s": 4.410280362935737,
+            "cached_tokens": 0
+          },
+          "token_sha256": "a15e2e94734453f74ecde3866cb5309a4eaa47cfc248b9f4191ce47613e02222",
+          "request_index": 11
+        },
+        {
+          "sample": {
+            "input_tokens": 4096,
+            "output_tokens": 1,
+            "ttft_s": 4.4100560690276325,
+            "latency_s": 4.4100560690276325,
+            "cached_tokens": 0
+          },
+          "token_sha256": "a8f2ecf6c811b67c050190173c8b89ce2c99b7993d29235ff3bf656b6a2c505e",
+          "request_index": 12
+        },
+        {
+          "sample": {
+            "input_tokens": 4096,
+            "output_tokens": 1,
+            "ttft_s": 4.409874703036621,
+            "latency_s": 4.409874703036621,
+            "cached_tokens": 0
+          },
+          "token_sha256": "4b1c0cf6d0c649c6a391a8a091e196d3ad94824f99ae2497ed0648f8e1911193",
+          "request_index": 13
+        },
+        {
+          "sample": {
+            "input_tokens": 4096,
+            "output_tokens": 1,
+            "ttft_s": 5.319915942149237,
+            "latency_s": 5.319915942149237,
+            "cached_tokens": 0
+          },
+          "token_sha256": "9cab0519f56f13acec86572516e8ebe7b99aa40011ec3171c9c8af90c08cae7a",
+          "request_index": 14
+        },
+        {
+          "sample": {
+            "input_tokens": 4096,
+            "output_tokens": 1,
+            "ttft_s": 5.31974850804545,
+            "latency_s": 5.31974850804545,
+            "cached_tokens": 0
+          },
+          "token_sha256": "2e826489cf9b9ae4387d7d0ff1c53e20764bab885bb8bcc36bad62c2f7dd97b1",
+          "request_index": 15
+        },
+        {
+          "sample": {
+            "input_tokens": 4096,
+            "output_tokens": 1,
+            "ttft_s": 5.319528667023405,
+            "latency_s": 5.319528667023405,
+            "cached_tokens": 0
+          },
+          "token_sha256": "0dcf125c707020d9131f80175a35a893a59b85c34652446364022ba593b5b93f",
+          "request_index": 16
+        },
+        {
+          "sample": {
+            "input_tokens": 4096,
+            "output_tokens": 1,
+            "ttft_s": 5.319276290945709,
+            "latency_s": 5.319276290945709,
+            "cached_tokens": 0
+          },
+          "token_sha256": "991a26ff4edaa7d5244848d1b20fa4c667589de6f83f6e38b45c763f8bee10eb",
+          "request_index": 17
+        },
+        {
+          "sample": {
+            "input_tokens": 4096,
+            "output_tokens": 1,
+            "ttft_s": 6.22419312200509,
+            "latency_s": 6.22419312200509,
+            "cached_tokens": 0
+          },
+          "token_sha256": "a8f2ecf6c811b67c050190173c8b89ce2c99b7993d29235ff3bf656b6a2c505e",
+          "request_index": 18
+        },
+        {
+          "sample": {
+            "input_tokens": 4096,
+            "output_tokens": 1,
+            "ttft_s": 6.223985800985247,
+            "latency_s": 6.223985800985247,
+            "cached_tokens": 0
+          },
+          "token_sha256": "d2e7a58b547f38c8e458cc38bb8eb9b0ce73ff544a9fd878d92d1293ad3f1156",
+          "request_index": 19
+        },
+        {
+          "sample": {
+            "input_tokens": 4096,
+            "output_tokens": 1,
+            "ttft_s": 6.223763698013499,
+            "latency_s": 6.223763698013499,
+            "cached_tokens": 0
+          },
+          "token_sha256": "1fef7fe8456d7b412dea64bbddb1f1371f74592264027221c00c9b8c31f36cc2",
+          "request_index": 20
+        },
+        {
+          "sample": {
+            "input_tokens": 4096,
+            "output_tokens": 1,
+            "ttft_s": 6.223525024019182,
+            "latency_s": 6.223525024019182,
+            "cached_tokens": 0
+          },
+          "token_sha256": "525ec3b5ad9afc0f09a5f7e0eb865e97f5b4b614a85cf93f3ae644f8e5f874f0",
+          "request_index": 21
+        },
+        {
+          "sample": {
+            "input_tokens": 4096,
+            "output_tokens": 1,
+            "ttft_s": 6.972125506028533,
+            "latency_s": 6.972125506028533,
+            "cached_tokens": 0
+          },
+          "token_sha256": "525ec3b5ad9afc0f09a5f7e0eb865e97f5b4b614a85cf93f3ae644f8e5f874f0",
+          "request_index": 22
+        },
+        {
+          "sample": {
+            "input_tokens": 4096,
+            "output_tokens": 1,
+            "ttft_s": 6.971883886028081,
+            "latency_s": 6.971883886028081,
+            "cached_tokens": 0
+          },
+          "token_sha256": "53ba64be312c5bc2050210fc727aaf7a83084ba39af0f511d4f8099a7e427009",
+          "request_index": 23
+        },
+        {
+          "sample": {
+            "input_tokens": 4096,
+            "output_tokens": 1,
+            "ttft_s": 6.971624688943848,
+            "latency_s": 6.971624688943848,
+            "cached_tokens": 0
+          },
+          "token_sha256": "840d60afcf8aeb607ff32e9b4fba7e3132722c2148136c5f4e4816fec59f4ff3",
+          "request_index": 24
+        },
+        {
+          "sample": {
+            "input_tokens": 4096,
+            "output_tokens": 1,
+            "ttft_s": 6.971348054008558,
+            "latency_s": 6.971348054008558,
+            "cached_tokens": 0
+          },
+          "token_sha256": "cb08595957ea3cea82ab7d792dc7223ee4810e05ba0a4b4f3ce6e9263667235e",
+          "request_index": 25
+        },
+        {
+          "sample": {
+            "input_tokens": 4096,
+            "output_tokens": 1,
+            "ttft_s": 7.322346396977082,
+            "latency_s": 7.322346396977082,
+            "cached_tokens": 0
+          },
+          "token_sha256": "4b1c0cf6d0c649c6a391a8a091e196d3ad94824f99ae2497ed0648f8e1911193",
+          "request_index": 26
+        },
+        {
+          "sample": {
+            "input_tokens": 4096,
+            "output_tokens": 1,
+            "ttft_s": 7.322135076858103,
+            "latency_s": 7.322135076858103,
+            "cached_tokens": 0
+          },
+          "token_sha256": "4a05220206f8aac07690aa2f63674c7de030c23a17dedf1e82cc11dc3648b083",
+          "request_index": 27
+        },
+        {
+          "sample": {
+            "input_tokens": 4096,
+            "output_tokens": 1,
+            "ttft_s": 7.3219097789842635,
+            "latency_s": 7.3219097789842635,
+            "cached_tokens": 0
+          },
+          "token_sha256": "b8d52dc8aa20e6a056357c967c95447dd9feb6e3e818e98cb2b9183e8c918cc6",
+          "request_index": 28
+        },
+        {
+          "sample": {
+            "input_tokens": 4096,
+            "output_tokens": 1,
+            "ttft_s": 7.321680513909087,
+            "latency_s": 7.321680513909087,
+            "cached_tokens": 0
+          },
+          "token_sha256": "f35cc8f57f5dcd55f814cf7a0469cf44a00104bf76466c95fe07fc59e9c8bae3",
+          "request_index": 29
+        },
+        {
+          "sample": {
+            "input_tokens": 4096,
+            "output_tokens": 1,
+            "ttft_s": 7.3219861530233175,
+            "latency_s": 7.3219861530233175,
+            "cached_tokens": 0
+          },
+          "token_sha256": "03859c8f695ed122ca029bbcd1f6a1079c670d51e4e920d94edb5583890199e9",
+          "request_index": 30
+        },
+        {
+          "sample": {
+            "input_tokens": 4096,
+            "output_tokens": 1,
+            "ttft_s": 7.321724023902789,
+            "latency_s": 7.321724023902789,
+            "cached_tokens": 0
+          },
+          "token_sha256": "b603af9760dd1338905211cbbd764b6784126a118c251d56ddf94c695855ccb2",
+          "request_index": 31
+        }
+      ],
+      "gpu_after_case": "name, uuid, driver_version, memory.total [MiB], memory.used [MiB], utilization.gpu [%], power.draw [W], power.limit [W], clocks.current.sm [MHz], clocks.current.memory [MHz], temperature.gpu\nNVIDIA H100 80GB HBM3, GPU-redacted, 610.57.04, 81559 MiB, 52495 MiB, 0 %, 120.86 W, 700.00 W, 1980 MHz, 2619 MHz, 40"
+    },
+    {
+      "workload": {
+        "name": "decode_profile",
+        "input_tokens": 128,
+        "output_tokens": 32,
+        "concurrency": 32,
+        "requests": 32
+      },
+      "repetition": 0,
+      "summary": {
+        "completed": 32,
+        "elapsed_s": 4.585392699111253,
+        "output_tokens_per_s": 223.31784150100668,
+        "input_tokens_per_s": 893.2713660040267,
+        "requests_per_s": 6.978682546906459,
+        "cached_tokens": 0,
+        "ttft_ms": {
+          "mean": 373.1210215992178,
+          "p50": 376.67199957650155,
+          "p95": 378.2200372428633,
+          "count": 32
+        },
+        "latency_ms": {
+          "mean": 4582.477945070423,
+          "p50": 4582.889528595842,
+          "p95": 4584.28191835992,
+          "count": 32
+        },
+        "tpot_ms": {
+          "mean": 135.78570720874853,
+          "p50": 135.68443641997874,
+          "p95": 135.68860312525723,
+          "count": 32
+        }
+      },
+      "requests": [
+        {
+          "sample": {
+            "input_tokens": 128,
+            "output_tokens": 32,
+            "ttft_s": 0.26056135003454983,
+            "latency_s": 4.56767382286489,
+            "cached_tokens": 0
+          },
+          "token_sha256": "5465d69346f1007c25652668304c4ca54ae669c9716d4a468ea4db4f3e452212",
+          "request_index": 0
+        },
+        {
+          "sample": {
+            "input_tokens": 128,
+            "output_tokens": 32,
+            "ttft_s": 0.3784494888968766,
+            "latency_s": 4.584473954048008,
+            "cached_tokens": 0
+          },
+          "token_sha256": "fc42cdca12d4284effebf4a664715d9011d10ab1596fa0a2d9e536e5fc2b33d2",
+          "request_index": 1
+        },
+        {
+          "sample": {
+            "input_tokens": 128,
+            "output_tokens": 32,
+            "ttft_s": 0.37829293706454337,
+            "latency_s": 4.5843459570314735,
+            "cached_tokens": 0
+          },
+          "token_sha256": "03b5f2c1e5477182cf482be2e5576ecb1923cc03796a29270d249eb086fe6025",
+          "request_index": 2
+        },
+        {
+          "sample": {
+            "input_tokens": 128,
+            "output_tokens": 32,
+            "ttft_s": 0.378160391934216,
+            "latency_s": 4.584229523083195,
+            "cached_tokens": 0
+          },
+          "token_sha256": "963dcfb265bb5d64a7fb7c6508990ee2f0d3e97aaad93159a43ba5e7ea5e6d4c",
+          "request_index": 3
+        },
+        {
+          "sample": {
+            "input_tokens": 128,
+            "output_tokens": 32,
+            "ttft_s": 0.3780342270620167,
+            "latency_s": 4.584115701029077,
+            "cached_tokens": 0
+          },
+          "token_sha256": "c002509ee3ce0ce414f0fb7c94fdc23d70bc91793ca11e611da8b6bb92021f6d",
+          "request_index": 4
+        },
+        {
+          "sample": {
+            "input_tokens": 128,
+            "output_tokens": 32,
+            "ttft_s": 0.3779027038253844,
+            "latency_s": 4.5839946798514575,
+            "cached_tokens": 0
+          },
+          "token_sha256": "04d8162685ce7dc710b46d4b047d37aa978ce89f6471f41421a84dc56941da06",
+          "request_index": 5
+        },
+        {
+          "sample": {
+            "input_tokens": 128,
+            "output_tokens": 32,
+            "ttft_s": 0.37777551892213523,
+            "latency_s": 4.583877212135121,
+            "cached_tokens": 0
+          },
+          "token_sha256": "38776acb90fe3e0155405e79c7fe217f3e003547a79c1d36330de61ace847655",
+          "request_index": 6
+        },
+        {
+          "sample": {
+            "input_tokens": 128,
+            "output_tokens": 32,
+            "ttft_s": 0.3776612780056894,
+            "latency_s": 4.58377241785638,
+            "cached_tokens": 0
+          },
+          "token_sha256": "30571aa7422e9e676a27ecb511b2018f8d5dc4f01d4b6807d6cbaa9091f4ac89",
+          "request_index": 7
+        },
+        {
+          "sample": {
+            "input_tokens": 128,
+            "output_tokens": 32,
+            "ttft_s": 0.3775571908336133,
+            "latency_s": 4.583677613874897,
+            "cached_tokens": 0
+          },
+          "token_sha256": "44e03716fa2b31a6c1e3464453ccf1af24e245e387308c67f219b8a533b2dfc5",
+          "request_index": 8
+        },
+        {
+          "sample": {
+            "input_tokens": 128,
+            "output_tokens": 32,
+            "ttft_s": 0.37745340587571263,
+            "latency_s": 4.583583063911647,
+            "cached_tokens": 0
+          },
+          "token_sha256": "da421c9d95996ba03209d3e0da38dbfa76041ff97d05dccc5a7e5f01a1aefa34",
+          "request_index": 9
+        },
+        {
+          "sample": {
+            "input_tokens": 128,
+            "output_tokens": 32,
+            "ttft_s": 0.3773490749299526,
+            "latency_s": 4.583487872965634,
+            "cached_tokens": 0
+          },
+          "token_sha256": "1f9126eed174d7d8b152fccd023018036edb1d0202f7570c45274dc1dec0b01b",
+          "request_index": 10
+        },
+        {
+          "sample": {
+            "input_tokens": 128,
+            "output_tokens": 32,
+            "ttft_s": 0.3772477849852294,
+            "latency_s": 4.583394196117297,
+            "cached_tokens": 0
+          },
+          "token_sha256": "e24b7698ec839c44946711a855050af7db55c576145afd2303f494e9c024defb",
+          "request_index": 11
+        },
+        {
+          "sample": {
+            "input_tokens": 128,
+            "output_tokens": 32,
+            "ttft_s": 0.3771470729261637,
+            "latency_s": 4.58330289600417,
+            "cached_tokens": 0
+          },
+          "token_sha256": "0ad90a77570f3c298f53c21e7c125d824676071435ae865e831cb5f40bf9f19e",
+          "request_index": 12
+        },
+        {
+          "sample": {
+            "input_tokens": 128,
+            "output_tokens": 32,
+            "ttft_s": 0.37704976997338235,
+            "latency_s": 4.583232922013849,
+            "cached_tokens": 0
+          },
+          "token_sha256": "aeed90e7cee9671d6320740e8ad15fff8a9945a1f07a1671b32e18a7a7603c3b",
+          "request_index": 13
+        },
+        {
+          "sample": {
+            "input_tokens": 128,
+            "output_tokens": 32,
+            "ttft_s": 0.3769516150932759,
+            "latency_s": 4.583146419143304,
+            "cached_tokens": 0
+          },
+          "token_sha256": "44976adf8a61e5c0bae34d9bb5381c88d3fb0ead0ef9f0d9e261bbdf4b2c06a6",
+          "request_index": 14
+        },
+        {
+          "sample": {
+            "input_tokens": 128,
+            "output_tokens": 32,
+            "ttft_s": 0.3768520480953157,
+            "latency_s": 4.583055493189022,
+            "cached_tokens": 0
+          },
+          "token_sha256": "1ca521ddf8f8de74f2f6877f3baad59d9664d7dbaa96109cd6b1ecc7cc0af06c",
+          "request_index": 15
+        },
+        {
+          "sample": {
+            "input_tokens": 128,
+            "output_tokens": 32,
+            "ttft_s": 0.3767260080203414,
+            "latency_s": 4.582938614999875,
+            "cached_tokens": 0
+          },
+          "token_sha256": "fa51294ebd9a599a023afc348e392fa513114d7cf60d450d0dca801b3ac96ce7",
+          "request_index": 16
+        },
+        {
+          "sample": {
+            "input_tokens": 128,
+            "output_tokens": 32,
+            "ttft_s": 0.3766179911326617,
+            "latency_s": 4.582840442191809,
+            "cached_tokens": 0
+          },
+          "token_sha256": "ae7aaf58a1c238960d69c381920ab0f6babb55fafb1dae68ff4a2032ad679297",
+          "request_index": 17
+        },
+        {
+          "sample": {
+            "input_tokens": 128,
+            "output_tokens": 32,
+            "ttft_s": 0.3765199931804091,
+            "latency_s": 4.582751052221283,
+            "cached_tokens": 0
+          },
+          "token_sha256": "5f98792ceb1e5e3a0a4a15d8dbc1d8f2684cb5fbfebdc2060634feef603a8ca3",
+          "request_index": 18
+        },
+        {
+          "sample": {
+            "input_tokens": 128,
+            "output_tokens": 32,
+            "ttft_s": 0.3764198338612914,
+            "latency_s": 4.582658846862614,
+            "cached_tokens": 0
+          },
+          "token_sha256": "d6439cf1d2262e4371047ccbe9538f5981bc4f2f6bbed86bbc4936e8e653b4f9",
+          "request_index": 19
+        },
+        {
+          "sample": {
+            "input_tokens": 128,
+            "output_tokens": 32,
+            "ttft_s": 0.3763217020314187,
+            "latency_s": 4.5825707679614425,
+            "cached_tokens": 0
+          },
+          "token_sha256": "30571aa7422e9e676a27ecb511b2018f8d5dc4f01d4b6807d6cbaa9091f4ac89",
+          "request_index": 20
+        },
+        {
+          "sample": {
+            "input_tokens": 128,
+            "output_tokens": 32,
+            "ttft_s": 0.3762236461043358,
+            "latency_s": 4.58248160709627,
+            "cached_tokens": 0
+          },
+          "token_sha256": "5d3602e4335b8eb151a41dc816779d2e97d72cd0a5926ee9bbb0ea7c4c30421a",
+          "request_index": 21
+        },
+        {
+          "sample": {
+            "input_tokens": 128,
+            "output_tokens": 32,
+            "ttft_s": 0.3761167370248586,
+            "latency_s": 4.582383560948074,
+            "cached_tokens": 0
+          },
+          "token_sha256": "187c2560211581e12a3a6eb1e2afb1c7a5c7051531758a40838a9c97233e944a",
+          "request_index": 22
+        },
+        {
+          "sample": {
+            "input_tokens": 128,
+            "output_tokens": 32,
+            "ttft_s": 0.37601647106930614,
+            "latency_s": 4.582292590057477,
+            "cached_tokens": 0
+          },
+          "token_sha256": "050ac6d46d2bda2449a1224ed0b8c875dfd4b3e0b338e6d43a8022f741296482",
+          "request_index": 23
+        },
+        {
+          "sample": {
+            "input_tokens": 128,
+            "output_tokens": 32,
+            "ttft_s": 0.3759192409925163,
+            "latency_s": 4.582204964011908,
+            "cached_tokens": 0
+          },
+          "token_sha256": "393d62fbc100292aa2c08d62b22860bcd618a970e2fb43f1b41a9a2b090848f8",
+          "request_index": 24
+        },
+        {
+          "sample": {
+            "input_tokens": 128,
+            "output_tokens": 32,
+            "ttft_s": 0.3758096119854599,
+            "latency_s": 4.582104980945587,
+            "cached_tokens": 0
+          },
+          "token_sha256": "e450ee7d88d752efc5f21601bd591d7de8df281edd3e0225e411e6f73fdd6b5c",
+          "request_index": 25
+        },
+        {
+          "sample": {
+            "input_tokens": 128,
+            "output_tokens": 32,
+            "ttft_s": 0.375711333937943,
+            "latency_s": 4.582015551859513,
+            "cached_tokens": 0
+          },
+          "token_sha256": "d04311bc0311511987e28f981f2648986a63af6d90644105ffeb5c1a35268463",
+          "request_index": 26
+        },
+        {
+          "sample": {
+            "input_tokens": 128,
+            "output_tokens": 32,
+            "ttft_s": 0.37561263400129974,
+            "latency_s": 4.581926326965913,
+            "cached_tokens": 0
+          },
+          "token_sha256": "81be491670f8e5b39250c6417135bccca3402c8351cfb1286aa9f13d22891203",
+          "request_index": 27
+        },
+        {
+          "sample": {
+            "input_tokens": 128,
+            "output_tokens": 32,
+            "ttft_s": 0.375503018964082,
+            "latency_s": 4.581825861008838,
+            "cached_tokens": 0
+          },
+          "token_sha256": "ab50ad5bdb7ed19f144fcb240f76c011063c63581e21fc6232e153d722ef98c2",
+          "request_index": 28
+        },
+        {
+          "sample": {
+            "input_tokens": 128,
+            "output_tokens": 32,
+            "ttft_s": 0.37540355417877436,
+            "latency_s": 4.581735979998484,
+            "cached_tokens": 0
+          },
+          "token_sha256": "a3017512bac16e07f212685a631a6940d24c3e701f4ba3f2c535a6438e947c02",
+          "request_index": 29
+        },
+        {
+          "sample": {
+            "input_tokens": 128,
+            "output_tokens": 32,
+            "ttft_s": 0.3753017191775143,
+            "latency_s": 4.58164436602965,
+            "cached_tokens": 0
+          },
+          "token_sha256": "0bd80859c08ba22db3abb4944effd814e351da6e01fac867a46414a297d3bafd",
+          "request_index": 30
+        },
+        {
+          "sample": {
+            "input_tokens": 128,
+            "output_tokens": 32,
+            "ttft_s": 0.37520333705469966,
+            "latency_s": 4.581554983975366,
+            "cached_tokens": 0
+          },
+          "token_sha256": "8733001ec090ba66f041edd7065b5f3022b1a6b5280d511acf9ad2e00ff48af1",
+          "request_index": 31
+        }
+      ],
+      "gpu_after_case": "name, uuid, driver_version, memory.total [MiB], memory.used [MiB], utilization.gpu [%], power.draw [W], power.limit [W], clocks.current.sm [MHz], clocks.current.memory [MHz], temperature.gpu\nNVIDIA H100 80GB HBM3, GPU-redacted, 610.57.04, 81559 MiB, 52495 MiB, 100 %, 272.98 W, 700.00 W, 1980 MHz, 2619 MHz, 47"
+    }
+  ],
+  "resolved_engine_config": "model='~/.cache/huggingface/hub/models--Qwen--Qwen3.8-27B-FP8/snapshots/017b9c7af6b5689d5dd426a76e0bc077eb5ca20a', speculative_config=None, tokenizer='~/.cache/huggingface/hub/models--Qwen--Qwen3.8-27B-FP8/snapshots/017b9c7af6b5689d5dd426a76e0bc077eb5ca20a', skip_tokenizer_init=False, tokenizer_mode=auto, revision=None, tokenizer_revision=None, trust_remote_code=False, dtype=torch.bfloat16, max_seq_len=10240, download_dir=None, load_format=auto, tensor_parallel_size=1, pipeline_parallel_size=1, data_parallel_size=1, decode_context_parallel_size=1, dcp_comm_backend=ag_rs, disable_custom_all_reduce=False, quantization=fp8, quantization_config=None, enforce_eager=False, enable_return_routed_experts=False, kv_cache_dtype=auto, device_config=cuda, structured_outputs_config=StructuredOutputsConfig(backend='auto', disable_any_whitespace=False, disable_additional_properties=False, reasoning_parser='', reasoning_parser_plugin='', enable_in_reasoning=False), observability_config=ObservabilityConfig(show_hidden_metrics_for_version=None, otlp_traces_endpoint=None, collect_detailed_traces=None, kv_cache_metrics=False, kv_cache_metrics_sample=0.01, cudagraph_metrics=False, enable_layerwise_nvtx_tracing=False, enable_mfu_metrics=False, enable_mm_processor_stats=False, enable_logging_iteration_details=False, jit_monitor_mode='warn', jit_monitor_verbose=False), seed=0, served_model_name=~/.cache/huggingface/hub/models--Qwen--Qwen3.8-27B-FP8/snapshots/017b9c7af6b5689d5dd426a76e0bc077eb5ca20a, enable_prefix_caching=True, enable_chunked_prefill=True, pooler_config=None, compilation_config={'mode': <CompilationMode.VLLM_COMPILE: 3>, 'debug_dump_path': None, 'cache_dir': 'qwen38-h100-lab/gdn_pass/build/gdn_compile', 'compile_cache_save_format': 'binary', 'backend': 'inductor', 'custom_ops': ['+quant_fp8', 'none', '+quant_fp8'], 'ir_enable_torch_wrap': True, 'splitting_ops': ['vllm::unified_attention_with_output', 'vllm::unified_mla_attention_with_output', 'vllm::mamba_mixer2', 'vllm::mamba_mixer', 'vllm::short_conv', 'vllm::linear_attention', 'vllm::plamo2_mamba_mixer', 'vllm::qwen_gdn_attention_core', 'vllm::gdn_attention_core_xpu', 'vllm::olmo_hybrid_gdn_full_forward', 'vllm::kda_attention', 'vllm::sparse_attn_indexer', 'vllm::rocm_aiter_sparse_attn_indexer', 'vllm::deepseek_v4_attention', 'vllm::hpc_rope_norm_forward', 'vllm::unified_kv_cache_update', 'vllm::unified_mla_kv_cache_update'], 'compile_mm_encoder': False, 'cudagraph_mm_encoder': False, 'encoder_cudagraph_token_budgets': [], 'encoder_cudagraph_max_vision_items_per_batch': 0, 'encoder_cudagraph_max_frames_per_batch': None, 'compile_sizes': [], 'compile_ranges_endpoints': [16384], 'inductor_compile_config': {'enable_auto_functionalized_v2': False, 'size_asserts': False, 'alignment_asserts': False, 'scalar_asserts': False, 'combo_kernels': True, 'benchmark_combo_kernel': True}, 'inductor_passes': {}, 'cudagraph_mode': <CUDAGraphMode.FULL_AND_PIECEWISE: (2, 1)>, 'cudagraph_num_of_warmups': 1, 'cudagraph_capture_sizes': [1, 2, 4, 8, 16, 24, 32, 48, 64], 'cudagraph_copy_inputs': False, 'cudagraph_specialize_lora': True, 'use_inductor_graph_partition': False, 'pass_config': {'fuse_norm_quant': True, 'fuse_act_quant': True, 'fuse_attn_quant': False, 'enable_sp': False, 'fuse_gemm_comms': False, 'fuse_allreduce_rms': False, 'enable_qk_norm_rope_fusion': False, 'fuse_rope_kvcache_cat_mla': False, 'fuse_act_padding': False, 'fuse_qk_norm_rope_kvcache': False}, 'max_cudagraph_capture_size': 64, 'dynamic_shapes_config': {'type': <DynamicShapesType.BACKED: 'backed'>, 'evaluate_guards': False, 'assume_32_bit_indexing': False}, 'local_cache_dir': None, 'fast_moe_cold_start': False, 'static_all_moe_layers': []}, kernel_config=KernelConfig(ir_op_priority=IrOpPriorityConfig(rms_norm=['native'], fused_add_rms_norm=['native']), enable_flashinfer_autotune=True, enable_cutedsl_warmup=True, enable_bf16x3_router_gemm=False, moe_backend='auto', linear_backend='auto')",
+  "load_seconds": 326.08421369805,
+  "quality_smoke": [
+    {
+      "question": "Reply with only the city name: What is the capital of France?",
+      "expected": "Paris",
+      "text": "Paris",
+      "token_ids": [
+        57590,
+        248046
+      ],
+      "passed": true
+    },
+    {
+      "question": "Reply with only the number: What is 7 multiplied by 8?",
+      "expected": "56",
+      "text": "56",
+      "token_ids": [
+        20,
+        21,
+        248046
+      ],
+      "passed": true
+    },
+    {
+      "question": "Reply with only the word: What is the opposite of hot?",
+      "expected": "cold",
+      "text": "Cold",
+      "token_ids": [
+        73804,
+        248046
+      ],
+      "passed": true
+    }
+  ],
+  "finished_at": "2026-10-01T12:50:24.844003+00:00"
+}

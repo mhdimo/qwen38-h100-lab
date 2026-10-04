@@ -1,0 +1,15 @@
+[
+  {
+    "config": "kernel_bench",
+    "exit_code": 0,
+    "command": [
+      "<python-env>/bin/python",
+      "-m",
+      "custom_kernels.experiment",
+      "--action",
+      "bench",
+      "--output",
+      "qwen38-h100-lab/results/20261001T121049.464234Z/kernel_bench.json"
+    ]
+  }
+]

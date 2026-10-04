@@ -1,0 +1,14 @@
+{
+  "status": "failed",
+  "action": "validate",
+  "started_at": "2026-10-01T12:05:46.010298+00:00",
+  "gpu": "name, uuid, driver_version, memory.total [MiB], memory.used [MiB], utilization.gpu [%], power.draw [W], power.limit [W], clocks.current.sm [MHz], clocks.current.memory [MHz], temperature.gpu\nNVIDIA H100 80GB HBM3, GPU-redacted, 610.57.04, 81559 MiB, 0 MiB, 0 %, 70.30 W, 700.00 W, 345 MHz, 2619 MHz, 32",
+  "source_sha256": {
+    "silu_mul_fp8.cu": "f64881048d1366ad5628caafc618971c07fc4f43aa377eecc6d0591148bd440c",
+    "experiment.py": "c819eee3466af6afe9bab428e078ce3d82f3063c7b8553b8174acad670eb2216",
+    "silu_mul_fp8.py": "8d9eddcf6cacff830633772c4307f2b0ec36616d5f38df8cc3b3008ae38abf90"
+  },
+  "torch": "2.11.0+cu130",
+  "error": "RuntimeError('unsupported scale layout')",
+  "finished_at": "2026-10-01T12:06:11.516405+00:00"
+}
